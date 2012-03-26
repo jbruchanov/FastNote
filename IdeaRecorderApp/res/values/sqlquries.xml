@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="SQL_CREATE_IDEAS_TABLE">
+		<![CDATA[
+		CREATE TABLE [Ideas] ([Id] INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL,	   					  
+		   					  [IdeaType] INTEGER NOT NULL,
+		   					  [Name] TEXT NOT NULL,
+		   					  [Description] TEXT NULL, 
+		   					  [Path] TEXT NULL,
+		   					  [SaveTime] NUMERIC NOT NULL)
+		]]>
+	</string>	
+	
+    <string name="SQL_SELECT_ALL_TABLES">
+		<![CDATA[
+			SELECT tbl_name FROM [sqlite_master] WHERE type = \'table\' AND name <> \'sqlite_sequence\' AND name <> \'android_metadata\'
+		]]>
+	</string>	    
+</resources>
