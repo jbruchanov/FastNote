@@ -8,13 +8,13 @@ import java.util.UUID;
 
 import javassist.expr.NewArray;
 
+import com.scurab.android.idearecorder.TestHelper;
 import com.scurab.android.idearecorder.model.Idea;
 
 import android.test.AndroidTestCase;
 
 public class DataproviderTest extends AndroidTestCase
 {
-	private Random mRandom = new Random();
 	@Override
 	protected void setUp() throws Exception
 	{
@@ -75,25 +75,17 @@ public class DataproviderTest extends AndroidTestCase
 	
 	public void testAddIdeaItem()
 	{
-		Idea i = getRandomIdea();
+		Idea i = TestHelper.getRandomIdea();
 		DataProvider db = new DataProvider(mContext);
 		db.save(i);
 		assertTrue(i.getId() != 0);
 	}
 	
-	private Idea getRandomIdea()
-	{
-		Idea i = new Idea().setName(UUID.randomUUID().toString())
-				.setDescription(UUID.randomUUID().toString())
-				.setIdeaType(1 + mRandom.nextInt(4))
-				.setSaveTime(System.currentTimeMillis())
-				.setPath(UUID.randomUUID().toString());
-		return i;
-	}
+	
 	
 	public void testAddAndReadIdeaItem()
 	{
-		Idea i = getRandomIdea();
+		Idea i = TestHelper.getRandomIdea();
 		DataProvider db = new DataProvider(mContext);
 		db.save(i);
 		Idea i2 = db.getIdea(i.getId());
@@ -118,9 +110,9 @@ public class DataproviderTest extends AndroidTestCase
 	public void testGetAllIdeas3AddedDB()
 	{			
 		List<Idea> data = new ArrayList<Idea>();
-		data.add(getRandomIdea());
-		data.add(getRandomIdea());
-		data.add(getRandomIdea());
+		data.add(TestHelper.getRandomIdea());
+		data.add(TestHelper.getRandomIdea());
+		data.add(TestHelper.getRandomIdea());
 		
 		
 		DataProvider db = new DataProvider(mContext);
@@ -138,7 +130,7 @@ public class DataproviderTest extends AndroidTestCase
 	public void testDeleteIdea()
 	{
 		DataProvider db = new DataProvider(mContext);
-		Idea i = getRandomIdea();
+		Idea i = TestHelper.getRandomIdea();
 		db.save(i);
 		List<Idea> data = db.getIdeas();
 		assertNotNull(data);
@@ -151,9 +143,9 @@ public class DataproviderTest extends AndroidTestCase
 	public void testUpdateIdea()
 	{
 		DataProvider db = new DataProvider(mContext);
-		Idea i = getRandomIdea();
+		Idea i = TestHelper.getRandomIdea();
 		db.save(i);
-		Idea i2 = getRandomIdea();
+		Idea i2 = TestHelper.getRandomIdea();
 		i2.setId(i.getId());
 		db.udpate(i2);
 		
