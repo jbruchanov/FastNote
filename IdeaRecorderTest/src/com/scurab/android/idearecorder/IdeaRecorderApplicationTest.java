@@ -10,4 +10,10 @@ public class IdeaRecorderApplicationTest extends AndroidTestCase
 		Context c = getContext().getApplicationContext();
 		assertTrue(c instanceof IdeaRecorderApplication);
 	}
+	
+	public void testGetDatabase()
+	{
+		IdeaRecorderApplication c = (IdeaRecorderApplication) getContext().getApplicationContext();
+		assertNotNull(c.getDatabase());
+	}
 }

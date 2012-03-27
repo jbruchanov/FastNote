@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
-import javassist.expr.NewArray;
-
 import com.scurab.android.idearecorder.TestHelper;
 import com.scurab.android.idearecorder.model.Idea;
 

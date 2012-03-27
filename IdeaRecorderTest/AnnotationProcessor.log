@@ -1,0 +1,176 @@
+27.3.2012 18:42:14 - NOTE : Start Processing Annotations
+27.3.2012 18:42:14 - NOTE : Processing [public void testBinding() ]
+27.3.2012 18:42:14 - NOTE : Adding Class to Mocking List: com.scurab.android.idearecorder.activity.MainActivity
+27.3.2012 18:42:14 - ERROR : Could not find com.scurab.android.idearecorder.activity.MainActivity
+27.3.2012 18:42:14 - ERROR : java.lang.ClassNotFoundException: com.scurab.android.idearecorder.activity.MainActivity
+	at java.net.URLClassLoader$1.run(Unknown Source)
+	at java.net.URLClassLoader$1.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.net.URLClassLoader.findClass(Unknown Source)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	at java.lang.Class.forName0(Native Method)
+	at java.lang.Class.forName(Unknown Source)
+	at com.google.android.testing.mocking.UsesMocksProcessor.findClassesToMock(UsesMocksProcessor.java:179)
+	at com.google.android.testing.mocking.UsesMocksProcessor.getClassesToMock(UsesMocksProcessor.java:125)
+	at com.google.android.testing.mocking.UsesMocksProcessor.process(UsesMocksProcessor.java:86)
+	at org.eclipse.jdt.internal.compiler.apt.dispatch.RoundDispatcher.handleProcessor(RoundDispatcher.java:139)
+	at org.eclipse.jdt.internal.compiler.apt.dispatch.RoundDispatcher.round(RoundDispatcher.java:121)
+	at org.eclipse.jdt.internal.compiler.apt.dispatch.BaseAnnotationProcessorManager.processAnnotations(BaseAnnotationProcessorManager.java:159)
+	at org.eclipse.jdt.internal.apt.pluggable.core.dispatch.IdeAnnotationProcessorManager.processAnnotations(IdeAnnotationProcessorManager.java:134)
+	at org.eclipse.jdt.internal.compiler.Compiler.processAnnotations(Compiler.java:813)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:432)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:364)
+	at org.eclipse.jdt.internal.core.builder.BatchImageBuilder.compile(BatchImageBuilder.java:178)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:301)
+	at org.eclipse.jdt.internal.core.builder.BatchImageBuilder.build(BatchImageBuilder.java:60)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildAll(JavaBuilder.java:254)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:173)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:728)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:199)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:239)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:292)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:295)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:351)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:374)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:513)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:422)
+	at org.eclipse.ui.actions.GlobalBuildAction$1.run(GlobalBuildAction.java:180)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+27.3.2012 18:42:14 - NOTE : Known Classpath: 
+27.3.2012 18:42:14 - NOTE : file:/F:/0Work/libraries/android/AndroidMock/AndroidMockGenerator.jar
+27.3.2012 18:42:14 - NOTE : file:/F:/0Work/android-sdk/platforms/android-8/android.jar
+27.3.2012 18:42:14 - NOTE : file:/cd 
+27.3.2012 18:42:14 - NOTE : Found 0 classes to mock
+27.3.2012 18:42:14 - NOTE : Found 0 mocked classes to save
+27.3.2012 18:42:14 - NOTE : Finished Processing Mocks
+27.3.2012 18:42:14 - NOTE : Start Processing Annotations
+27.3.2012 18:42:14 - NOTE : Processing []
+27.3.2012 18:42:14 - NOTE : Found 0 classes to mock
+27.3.2012 18:42:14 - NOTE : Found 0 mocked classes to save
+27.3.2012 18:42:14 - NOTE : Finished Processing Mocks
+27.3.2012 18:44:36 - NOTE : Start Processing Annotations
+27.3.2012 18:44:36 - NOTE : Processing [public void testMocks() throws java.lang.ClassNotFoundException]
+27.3.2012 18:44:36 - NOTE : Adding Class to Mocking List: com.scurab.android.idearecorder.presenter.MainActivityPresenterTest$ClassToMock
+27.3.2012 18:44:36 - ERROR : Could not find com.scurab.android.idearecorder.presenter.MainActivityPresenterTest$ClassToMock
+27.3.2012 18:44:36 - ERROR : java.lang.ClassNotFoundException: com.scurab.android.idearecorder.presenter.MainActivityPresenterTest$ClassToMock
+	at java.net.URLClassLoader$1.run(Unknown Source)
+	at java.net.URLClassLoader$1.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.net.URLClassLoader.findClass(Unknown Source)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	at java.lang.Class.forName0(Native Method)
+	at java.lang.Class.forName(Unknown Source)
+	at com.google.android.testing.mocking.UsesMocksProcessor.findClassesToMock(UsesMocksProcessor.java:179)
+	at com.google.android.testing.mocking.UsesMocksProcessor.getClassesToMock(UsesMocksProcessor.java:125)
+	at com.google.android.testing.mocking.UsesMocksProcessor.process(UsesMocksProcessor.java:86)
+	at org.eclipse.jdt.internal.compiler.apt.dispatch.RoundDispatcher.handleProcessor(RoundDispatcher.java:139)
+	at org.eclipse.jdt.internal.compiler.apt.dispatch.RoundDispatcher.round(RoundDispatcher.java:121)
+	at org.eclipse.jdt.internal.compiler.apt.dispatch.BaseAnnotationProcessorManager.processAnnotations(BaseAnnotationProcessorManager.java:159)
+	at org.eclipse.jdt.internal.apt.pluggable.core.dispatch.IdeAnnotationProcessorManager.processAnnotations(IdeAnnotationProcessorManager.java:134)
+	at org.eclipse.jdt.internal.compiler.Compiler.processAnnotations(Compiler.java:813)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:432)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:364)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.compile(IncrementalImageBuilder.java:329)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:301)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:134)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:265)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:193)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:728)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:199)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:239)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:292)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:295)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:256)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:394)
+	at org.eclipse.core.internal.resources.Project$1.run(Project.java:618)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2344)
+	at org.eclipse.core.internal.resources.Project.internalBuild(Project.java:597)
+	at org.eclipse.core.internal.resources.Project.build(Project.java:114)
+	at com.android.ide.eclipse.adt.internal.project.ProjectHelper.doFullIncrementalDebugBuild(ProjectHelper.java:966)
+	at com.android.ide.eclipse.adt.internal.launch.LaunchConfigDelegate.launch(LaunchConfigDelegate.java:147)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:854)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:703)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:937)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin$8.run(DebugUIPlugin.java:1141)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+27.3.2012 18:44:36 - NOTE : Known Classpath: 
+27.3.2012 18:44:36 - NOTE : file:/F:/0Work/libraries/android/AndroidMock/AndroidMockGenerator.jar
+27.3.2012 18:44:36 - NOTE : file:/F:/0Work/android-sdk/platforms/android-8/android.jar
+27.3.2012 18:44:36 - NOTE : file:/F:/0Work/eclipse-worskpace-android/IdeaRecorder/IdeaRecorderApp/bin/
+27.3.2012 18:44:36 - NOTE : Found 0 classes to mock
+27.3.2012 18:44:36 - NOTE : Found 0 mocked classes to save
+27.3.2012 18:44:36 - NOTE : Finished Processing Mocks
+27.3.2012 18:44:36 - NOTE : Start Processing Annotations
+27.3.2012 18:44:36 - NOTE : Processing []
+27.3.2012 18:44:36 - NOTE : Found 0 classes to mock
+27.3.2012 18:44:36 - NOTE : Found 0 mocked classes to save
+27.3.2012 18:44:36 - NOTE : Finished Processing Mocks
+27.3.2012 18:44:48 - NOTE : Start Processing Annotations
+27.3.2012 18:44:48 - NOTE : Processing [public void testMocks() throws java.lang.ClassNotFoundException]
+27.3.2012 18:44:48 - NOTE : Adding Class to Mocking List: com.scurab.android.idearecorder.presenter.MainActivityPresenterTest$ClassToMock
+27.3.2012 18:44:48 - ERROR : Could not find com.scurab.android.idearecorder.presenter.MainActivityPresenterTest$ClassToMock
+27.3.2012 18:44:48 - ERROR : java.lang.ClassNotFoundException: com.scurab.android.idearecorder.presenter.MainActivityPresenterTest$ClassToMock
+	at java.net.URLClassLoader$1.run(Unknown Source)
+	at java.net.URLClassLoader$1.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.net.URLClassLoader.findClass(Unknown Source)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	at java.lang.Class.forName0(Native Method)
+	at java.lang.Class.forName(Unknown Source)
+	at com.google.android.testing.mocking.UsesMocksProcessor.findClassesToMock(UsesMocksProcessor.java:179)
+	at com.google.android.testing.mocking.UsesMocksProcessor.getClassesToMock(UsesMocksProcessor.java:125)
+	at com.google.android.testing.mocking.UsesMocksProcessor.process(UsesMocksProcessor.java:86)
+	at org.eclipse.jdt.internal.compiler.apt.dispatch.RoundDispatcher.handleProcessor(RoundDispatcher.java:139)
+	at org.eclipse.jdt.internal.compiler.apt.dispatch.RoundDispatcher.round(RoundDispatcher.java:121)
+	at org.eclipse.jdt.internal.compiler.apt.dispatch.BaseAnnotationProcessorManager.processAnnotations(BaseAnnotationProcessorManager.java:159)
+	at org.eclipse.jdt.internal.apt.pluggable.core.dispatch.IdeAnnotationProcessorManager.processAnnotations(IdeAnnotationProcessorManager.java:134)
+	at org.eclipse.jdt.internal.compiler.Compiler.processAnnotations(Compiler.java:813)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:432)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:364)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.compile(IncrementalImageBuilder.java:329)
+	at org.eclipse.jdt.internal.core.builder.AbstractImageBuilder.compile(AbstractImageBuilder.java:301)
+	at org.eclipse.jdt.internal.core.builder.IncrementalImageBuilder.build(IncrementalImageBuilder.java:134)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildDeltas(JavaBuilder.java:265)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:193)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:728)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:199)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:239)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:292)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:295)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:256)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:394)
+	at org.eclipse.core.internal.resources.Project$1.run(Project.java:618)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2344)
+	at org.eclipse.core.internal.resources.Project.internalBuild(Project.java:597)
+	at org.eclipse.core.internal.resources.Project.build(Project.java:114)
+	at com.android.ide.eclipse.adt.internal.project.ProjectHelper.doFullIncrementalDebugBuild(ProjectHelper.java:966)
+	at com.android.ide.eclipse.adt.internal.launch.LaunchConfigDelegate.launch(LaunchConfigDelegate.java:147)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:854)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:703)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:937)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin$8.run(DebugUIPlugin.java:1141)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+27.3.2012 18:44:48 - NOTE : Known Classpath: 
+27.3.2012 18:44:48 - NOTE : file:/F:/0Work/libraries/android/AndroidMock/AndroidMockGenerator.jar
+27.3.2012 18:44:48 - NOTE : file:/F:/0Work/android-sdk/platforms/android-8/android.jar
+27.3.2012 18:44:48 - NOTE : file:/F:/0Work/eclipse-worskpace-android/IdeaRecorder/IdeaRecorderApp/bin/
+27.3.2012 18:44:48 - NOTE : Found 0 classes to mock
+27.3.2012 18:44:48 - NOTE : Found 0 mocked classes to save
+27.3.2012 18:44:48 - NOTE : Finished Processing Mocks
+27.3.2012 18:44:48 - NOTE : Start Processing Annotations
+27.3.2012 18:44:48 - NOTE : Processing []
+27.3.2012 18:44:48 - NOTE : Found 0 classes to mock
+27.3.2012 18:44:48 - NOTE : Found 0 mocked classes to save
+27.3.2012 18:44:48 - NOTE : Finished Processing Mocks

@@ -5,7 +5,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/IdeaRecorderApp"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/AndroidMock"/>
 	<classpathentry kind="src" path=".apt_generated">
 		<attributes>
 			<attribute name="optional" value="true"/>
