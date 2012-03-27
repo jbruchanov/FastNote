@@ -24,15 +24,7 @@ public class IdeaViewTest extends AndroidTestCase
 	{
 		Idea i = TestHelper.getRandomIdea();
 		IdeaView iv = new IdeaView(mContext, i);
-		TextView tvName = (TextView) iv.findViewById(R.id.tvName);
-		TextView tvDescription = (TextView) iv.findViewById(R.id.tvDescription);
-		TextView tvTime = (TextView) iv.findViewById(R.id.tvTime);
-		ImageView icon = (ImageView) iv.findViewById(R.id.ivIcon);
-		
-		assertEquals(i.getName(),tvName.getText().toString());
-		assertEquals(i.getDescription(),tvDescription.getText().toString());
-		assertEquals(new Date(i.getSaveTime()).toLocaleString(),tvTime.getText().toString());	
-		assertNotNull(icon);		
+		TestHelper.assertIdeaView(i, iv);		
 	}
 	
 	public void testChangeValueGuiBinding()
@@ -40,16 +32,7 @@ public class IdeaViewTest extends AndroidTestCase
 		Idea i1 = TestHelper.getRandomIdea();
 		Idea i = TestHelper.getRandomIdea();
 		IdeaView iv = new IdeaView(mContext, i1);		
-		iv.setIdea(i);
-		
-		TextView tvName = (TextView) iv.findViewById(R.id.tvName);
-		TextView tvDescription = (TextView) iv.findViewById(R.id.tvDescription);
-		TextView tvTime = (TextView) iv.findViewById(R.id.tvTime);
-		ImageView icon = (ImageView) iv.findViewById(R.id.ivIcon);
-		
-		assertEquals(i.getName(),tvName.getText().toString());
-		assertEquals(i.getDescription(),tvDescription.getText().toString());
-		assertEquals(new Date(i.getSaveTime()).toLocaleString(),tvTime.getText().toString());	
-		assertNotNull(icon);		
+		iv.setIdea(i);		
+		TestHelper.assertIdeaView(i, iv);		
 	}
 }
