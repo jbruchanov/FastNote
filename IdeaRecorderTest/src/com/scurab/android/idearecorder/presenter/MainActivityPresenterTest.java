@@ -4,18 +4,22 @@ package com.scurab.android.idearecorder.presenter;
 
 import java.util.List;
 
+import com.scurab.android.idearecorder.I;
 import com.scurab.android.idearecorder.R;
 import com.scurab.android.idearecorder.TestHelper;
 import com.scurab.android.idearecorder.activity.MainActivity;
+import com.scurab.android.idearecorder.activity.WriteActivity;
 import com.scurab.android.idearecorder.help.HelpContextMenu;
 import com.scurab.android.idearecorder.help.HelpImageButton;
 import com.scurab.android.idearecorder.help.HelpListView;
 import com.scurab.android.idearecorder.help.HelpMenuItem;
+import com.scurab.android.idearecorder.interfaces.OnActivityStateChangeListener;
 import com.scurab.android.idearecorder.interfaces.OnContextItemSelectedListener;
 import com.scurab.android.idearecorder.model.Idea;
 import com.scurab.android.idearecorder.tools.DataProvider;
 
 import android.content.Context;
+import android.content.Intent;
 import android.test.AndroidTestCase;
 import android.view.MenuItem;
 import android.view.View;
@@ -69,16 +73,7 @@ public class MainActivityPresenterTest extends AndroidTestCase
 		 assertNotNull(((HelpImageButton)ma.getVideoIdeaButton()).getOnClickListener());
 	 }
 	 
-	 public void testFindingViews()
-	 {
-		 MockMainActivity2 ma = new MockMainActivity2();		 
-		 ma.init();
-		 assertNotNull(ma.getListView());
-		 assertNotNull(ma.getWriteIdeaButton());
-		 assertNotNull(ma.getAudioIdeaButton());
-		 assertNotNull(ma.getPhotoIdeaButton());
-		 assertNotNull(ma.getVideoIdeaButton());
-	 }
+	 
 	 
 	 public void testLoadData()
 	 {
@@ -117,6 +112,14 @@ public class MainActivityPresenterTest extends AndroidTestCase
 		 ma.init();
 		 MainActivityPresenter map = new MainActivityPresenter(ma);
 		 assertNotNull(ma.itemClickListener);
+	 }
+	 
+	 public void testBindOnResumePauseListener()
+	 {
+		 MockMainActivity2 ma = new MockMainActivity2();
+		 ma.init();
+		 MainActivityPresenter map = new MainActivityPresenter(ma);
+		 assertNotNull(ma.onActivityStateChangeListener);
 	 }
 	 
 	 public void testDeleteIdeaByContextMenu()
@@ -162,7 +165,31 @@ public class MainActivityPresenterTest extends AndroidTestCase
 		 
 		 assertEquals(len-1,db.getIdeas().size());
 		 assertEquals(len-1,ma.getListView().getAdapter().getCount());
+	 }
+	 
+	 public void testStartWriteIdeaActivity()
+	 {
+		 MockMainActivity2 ma = new MockMainActivity2();
+		 ma.init();
+		 MainActivityPresenter map = new MainActivityPresenter(ma);
+		 map.onWriteIdeaButtonClick();
+		 assertEquals(WriteActivity.class.getName(), ma.startActivityClass);
+	 }
+	 
+	 public void testOpenItemToEdit()
+	 {
+		 Idea i = TestHelper.getRandomIdea();
+		 i.setIdeaType(Idea.TYPE_TEXT);
+		 db.save(i);
 		 
+		 MockMainActivity2 ma = new MockMainActivity2();
+		 ma.init();
+		 MainActivityPresenter map = new MainActivityPresenter(ma);
+		 map.loadData();
+		 map.onListViewItemClick(i);
+		 assertEquals(WriteActivity.class.getName(),ma.startActivityClass);
+		 assertTrue(ma.startIntent.hasExtra(I.Constants.IDEA_ID));
+		 assertEquals(i.getId(), ma.startIntent.getLongExtra(I.Constants.IDEA_ID, 0));
 	 }
 	 
 	 
@@ -214,6 +241,9 @@ public class MainActivityPresenterTest extends AndroidTestCase
 		 public OnCreateContextMenuListener createListener = null;
 		 public View contextMenuListener = null;
 		 public OnContextItemSelectedListener itemClickListener = null;
+		 public String startActivityClass = null;
+		 public OnActivityStateChangeListener onActivityStateChangeListener;
+		 public Intent startIntent = null;
 		 
 		public MockMainActivity2()
 		{
@@ -224,9 +254,10 @@ public class MainActivityPresenterTest extends AndroidTestCase
 		public void init()
 		{
 			super.init();
+						
 		}
-		 
-		 
+		 		
+		 		
 		@Override
 		protected View getContentView()
 		{
@@ -253,5 +284,17 @@ public class MainActivityPresenterTest extends AndroidTestCase
 			itemClickListener = listener;
 		}
 		
+		@Override
+		public void startActivity(android.content.Intent intent) 
+		{
+			startIntent = intent;
+			startActivityClass = intent.getComponent().getClassName();
+		};
+		
+		@Override
+		public void setOnActivityStateChangeListener(OnActivityStateChangeListener listener)
+		{
+			onActivityStateChangeListener = listener;
+		}
 	 }
 }

@@ -1,6 +1,7 @@
 package com.scurab.android.idearecorder.presenter;
 
 import android.R.integer;
+import android.content.Intent;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuInflater;
@@ -12,15 +13,18 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 
+import com.scurab.android.idearecorder.I;
 import com.scurab.android.idearecorder.R;
 import com.scurab.android.idearecorder.activity.MainActivity;
+import com.scurab.android.idearecorder.activity.WriteActivity;
 import com.scurab.android.idearecorder.adapter.IdeaListAdapter;
+import com.scurab.android.idearecorder.interfaces.OnActivityStateChangeListener;
 import com.scurab.android.idearecorder.interfaces.OnContextItemSelectedListener;
 import com.scurab.android.idearecorder.model.Idea;
 import com.scurab.android.idearecorder.tools.DataProvider;
 import com.scurab.android.idearecorder.view.IdeaView;
 
-public class MainActivityPresenter extends BasePresenter implements OnCreateContextMenuListener, OnContextItemSelectedListener
+public class MainActivityPresenter extends BasePresenter implements OnCreateContextMenuListener, OnContextItemSelectedListener, OnActivityStateChangeListener
 {
 	private MainActivity mContext = null;
 	private DataProvider mDataProvider = null;
@@ -85,6 +89,7 @@ public class MainActivityPresenter extends BasePresenter implements OnCreateCont
 		registerForContextMenu();
 		mContext.setOnContextMenuCreateListener(this);
 		mContext.setOnContextItemSelectedListener(this);
+		mContext.setOnActivityStateChangeListener(this);
 	}
 	
 	protected void registerForContextMenu()
@@ -94,12 +99,26 @@ public class MainActivityPresenter extends BasePresenter implements OnCreateCont
 	
 	public void onListViewItemClick(Idea item)
 	{
-		
+		Intent i = new Intent(mContext,getClassBytIdeaType(item.getIdeaType()));
+		i.putExtra(I.Constants.IDEA_ID, item.getId());
+		startActivity(i);
+	}
+	
+	protected Class<?> getClassBytIdeaType(int type)
+	{
+		Class<?> c = null;
+		switch(type)
+		{
+			case Idea.TYPE_TEXT:
+				c = WriteActivity.class;
+				break;
+		}
+		return c;
 	}
 	
 	public void onWriteIdeaButtonClick()
 	{
-		
+		startActivity(WriteActivity.class);
 	}
 	
 	public void onAudioIdeaButtonClick()
@@ -135,7 +154,7 @@ public class MainActivityPresenter extends BasePresenter implements OnCreateCont
 		}
 		catch(Exception e)
 		{
-			mContext.showError(e);
+			showError(e);
 		}
 	}
 	
@@ -163,7 +182,7 @@ public class MainActivityPresenter extends BasePresenter implements OnCreateCont
 		}
 		catch(Exception e)
 		{
-			mContext.showError(e);
+			showError(e);
 		}
 		return handled;
 	}
@@ -172,5 +191,17 @@ public class MainActivityPresenter extends BasePresenter implements OnCreateCont
 	{
 		mDataProvider.delete(i.getId());
 		((IdeaListAdapter)mContext.getListView().getAdapter()).remove(i);
+	}
+
+	@Override
+	public void onResume()
+	{
+		loadData();
+	}
+
+	@Override
+	public void onPause()
+	{
+		
 	}
 }

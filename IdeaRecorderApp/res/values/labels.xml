@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="lblDelete">Delete</string>    
+    <string name="lblDelete">Delete</string>
+    <string name="lblName">Name</string>    
+    <string name="lblDescription">Description</string>
 </resources>

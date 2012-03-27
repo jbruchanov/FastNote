@@ -3,5 +3,6 @@
 
     <string name="hello">Hello World!</string>
     <string name="app_name">IdeaRecorderApp</string>
+    <string name="errInvalidValueMissingArg0">Invalid values, missing %1$s</string>
 
 </resources>

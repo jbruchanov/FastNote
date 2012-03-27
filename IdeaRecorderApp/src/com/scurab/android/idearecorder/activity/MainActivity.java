@@ -23,9 +23,9 @@ public class MainActivity extends BaseActivity
 	private ImageButton mAudio = null;
 	private ImageButton mPhoto = null;
 	private ImageButton mVideo = null;
-	private OnCreateContextMenuListener mOnCreateContextMenuListener;
+	
 	private OnItemClickListener mOnItemClickListener;
-	private OnContextItemSelectedListener mOnContextItemSelectedListener;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -34,7 +34,6 @@ public class MainActivity extends BaseActivity
 		init();
 		this.setContentView(mContentView);
 		MainActivityPresenter map = new MainActivityPresenter(this);
-		map.loadData();
 	}
 	
 	protected void init()
@@ -83,31 +82,7 @@ public class MainActivity extends BaseActivity
 		return mVideo;
 	}
 
-	public void setOnContextMenuCreateListener(OnCreateContextMenuListener listener)
-	{
-		mOnCreateContextMenuListener = listener;
-	}	
 	
-	@Override
-	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo)
-	{
-		if(mOnContextItemSelectedListener != null)
-			mOnCreateContextMenuListener.onCreateContextMenu(menu, v, menuInfo);
-	}
-	
-	public void setOnContextItemSelectedListener(OnContextItemSelectedListener listener)
-	{
-		mOnContextItemSelectedListener = listener;
-	}
-	
-	@Override
-	public boolean onContextItemSelected(MenuItem item)
-	{	
-		if(mOnContextItemSelectedListener != null)
-			return mOnContextItemSelectedListener.onContextItemSelected(item);
-		return super.onContextItemSelected(item);
-		
-	}
 
 	
 }

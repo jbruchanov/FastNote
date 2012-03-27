@@ -1,23 +1,49 @@
 package com.scurab.android.idearecorder.presenter;
 
 import android.content.Context;
+import android.content.Intent;
 
 import com.scurab.android.idearecorder.IdeaRecorderApplication;
+import com.scurab.android.idearecorder.activity.BaseActivity;
 import com.scurab.android.idearecorder.tools.DataProvider;
 
-public abstract class BasePresenter
+public abstract class BasePresenter extends AppPresenter
 {
-	private Context mContext = null;
-	private IdeaRecorderApplication mApplication = null;
+	private BaseActivity mContext = null;
 	
-	public BasePresenter(Context context)
+	public BasePresenter(BaseActivity context)
 	{
+		super(context);
 		mContext = context;
-		mApplication = (IdeaRecorderApplication) mContext.getApplicationContext();
 	}
 	
-	public DataProvider getDatabase()
+	public void showError(final Throwable t)
+	{		
+		mContext.showError(t);						
+	}
+	
+	public void showMessage(final String msg)
+	{		
+		mContext.showMessage(msg);					
+	}
+	
+	public void showMessage(int resId)
+	{			
+		mContext.showMessage(resId);		
+	}
+	
+	public void startActivityForResult(Class<?> activityClass, int requestCode)
 	{
-		return mApplication.getDatabase();
+		startActivityForResult(new Intent(mContext,activityClass), requestCode);
+	} 
+	
+	public void startActivityForResult(Intent intent, int requestCode)
+	{
+		mContext.startActivityForResult(intent, requestCode);
+	}
+	
+	public void finish()
+	{
+		mContext.finish();
 	}
 }
