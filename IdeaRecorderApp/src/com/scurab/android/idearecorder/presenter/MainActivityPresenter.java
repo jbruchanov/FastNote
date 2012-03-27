@@ -41,7 +41,7 @@ public class MainActivityPresenter extends BasePresenter implements OnCreateCont
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id)
 			{
-				IdeaView iv = (IdeaView) parent.getItemAtPosition(position);
+				Idea iv = (Idea) parent.getItemAtPosition(position);
 				onListViewItemClick(iv);
 			}
 		});
@@ -92,7 +92,7 @@ public class MainActivityPresenter extends BasePresenter implements OnCreateCont
 		mContext.registerForContextMenu(mContext.getListView());
 	}
 	
-	public void onListViewItemClick(IdeaView item)
+	public void onListViewItemClick(Idea item)
 	{
 		
 	}

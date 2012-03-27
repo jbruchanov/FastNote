@@ -9,6 +9,7 @@ import junit.framework.TestCase;
 
 public class ByHand extends AndroidTestCase
 {
+	int debug = 0;
 	@Override
 	protected void setUp() throws Exception
 	{
@@ -20,6 +21,9 @@ public class ByHand extends AndroidTestCase
 	
 	public void testAddItems()
 	{
+		if(debug == 0)
+			return;
+		
 		DataProvider db = new DataProvider(mContext);
 		for(int i = 0;i<10;i++)
 			db.save(TestHelper.getRandomIdea());
