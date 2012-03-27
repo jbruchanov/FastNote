@@ -171,5 +171,6 @@ public class MainActivityPresenter extends BasePresenter implements OnCreateCont
 	public void onDeleteItem(Idea i)
 	{
 		mDataProvider.delete(i.getId());
+		((IdeaListAdapter)mContext.getListView().getAdapter()).remove(i);
 	}
 }

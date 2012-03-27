@@ -17,10 +17,11 @@ public class ByHand extends AndroidTestCase
 		if(db.getTables().size() == 0)
 			db.onCreate(db.getWritableDatabase());
 	}
-//	public void testAddItems()
-//	{
-//		DataProvider db = new DataProvider(mContext);
-//		for(int i = 0;i<10;i++)
-//			db.save(TestHelper.getRandomIdea());
-//	}
+	
+	public void testAddItems()
+	{
+		DataProvider db = new DataProvider(mContext);
+		for(int i = 0;i<10;i++)
+			db.save(TestHelper.getRandomIdea());
+	}
 }

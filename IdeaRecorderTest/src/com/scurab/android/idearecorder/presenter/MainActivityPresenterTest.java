@@ -141,6 +141,30 @@ public class MainActivityPresenterTest extends AndroidTestCase
 		 
 	 }
 	 
+	 public void testDeleteIdeaByContextMenuAndRefreshListBug()
+	 {
+		 MockMainActivity2 ma = new MockMainActivity2();
+		 ma.init();
+		 int len = 3;
+		 List<Idea> data = TestHelper.getRandomIdeas(len);
+ 		 for(Idea i : data)
+			 db.save(i);
+		 
+ 		 assertEquals(len,db.getIdeas().size());
+ 		 
+		 MainActivityPresenter map = new MainActivityPresenter(ma);
+		 map.loadData();
+		 
+		 HelpMenuItem hmi = new HelpMenuItem();		 
+		 hmi.setMenuInfo(new AdapterContextMenuInfo(null, 0, 0));
+		 hmi.setItemId(R.id.muDelete);		 
+		 map.onContextItemSelected(hmi);
+		 
+		 assertEquals(len-1,db.getIdeas().size());
+		 assertEquals(len-1,ma.getListView().getAdapter().getCount());
+		 
+	 }
+	 
 	 
 	 private class MockMainActivity1 extends MainActivity
 	 {
