@@ -31,6 +31,7 @@ public class MainActivityPresenter extends BasePresenter implements OnCreateCont
 		mDataProvider = getDatabase();
 		mContext = activity;		
 		bind();
+		
 	}
 	
 	private void bind()

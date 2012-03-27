@@ -2,6 +2,7 @@ package com.scurab.android.idearecorder.activity;
 
 import com.scurab.android.idearecorder.R;
 import com.scurab.android.idearecorder.interfaces.OnContextItemSelectedListener;
+import com.scurab.android.idearecorder.presenter.MainActivityPresenter;
 
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -9,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View.OnCreateContextMenuListener;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -31,6 +33,8 @@ public class MainActivity extends BaseActivity
 		super.onCreate(savedInstanceState);
 		init();
 		this.setContentView(mContentView);
+		MainActivityPresenter map = new MainActivityPresenter(this);
+		map.loadData();
 	}
 	
 	protected void init()
@@ -45,10 +49,13 @@ public class MainActivity extends BaseActivity
 	
 	protected View getContentView()
 	{
-		if(mContentView == null)
-			return View.inflate(this, R.layout.mainactivity, null);
-		else
-			return mContentView;
+		View v = mContentView;
+		if(v == null)
+		{
+			v = View.inflate(this, R.layout.mainactivity, null);
+			v.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,LayoutParams.FILL_PARENT));		
+		}		
+		return v;
 	}
 
 	public ListView getListView()
