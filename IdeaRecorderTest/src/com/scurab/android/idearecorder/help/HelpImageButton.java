@@ -2,7 +2,6 @@ package com.scurab.android.idearecorder.help;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 
 public class HelpImageButton extends ImageButton

@@ -1,14 +1,9 @@
 package com.scurab.android.idearecorder.view;
 
-import java.util.Date;
-
-import com.scurab.android.idearecorder.R;
 import com.scurab.android.idearecorder.TestHelper;
 import com.scurab.android.idearecorder.model.Idea;
 
 import android.test.AndroidTestCase;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 public class IdeaViewTest extends AndroidTestCase
 {

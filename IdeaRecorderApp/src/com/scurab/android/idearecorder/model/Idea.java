@@ -74,6 +74,6 @@ public class Idea implements Comparable<Idea>
 	@Override
 	public int compareTo(Idea another)
 	{
-		return ((Long)another.id).compareTo((Long)id);
+		return ((Long)another.id).compareTo(id);
 	}
 }

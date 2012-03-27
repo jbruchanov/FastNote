@@ -3,31 +3,36 @@ package com.scurab.android.idearecorder.tools;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
-import java.util.UUID;
-
 import com.scurab.android.idearecorder.TestHelper;
 import com.scurab.android.idearecorder.model.Idea;
 
+import android.content.Context;
 import android.test.AndroidTestCase;
 
 public class DataproviderTest extends AndroidTestCase
 {
+	DataProvider db = null;
+	@Override
+	public void setContext(Context context)
+	{	
+		super.setContext(context);
+		db = new DataProvider(mContext);		
+		db.dropAllTables();
+		db.onCreate(db.getWritableDatabase());
+	}
+	
 	@Override
 	protected void setUp() throws Exception
 	{
 		super.setUp();
-		DataProvider db = new DataProvider(mContext);		
-		db.dropAllTables();
-		db.onCreate(db.getWritableDatabase());
+		db.deleteAllData();
 	}
 	
 	@Override
 	protected void tearDown() throws Exception
 	{	
 		super.tearDown();
-		DataProvider db = new DataProvider(mContext);
-		db.dropAllTables();
+		db.deleteAllData();
 	}
 	
 	public void testGetDatabase()
@@ -55,6 +60,18 @@ public class DataproviderTest extends AndroidTestCase
 		db.dropAllTables();
 		List<String> tables = db.getTables();
 		assertEquals(0, tables.size());
+	}
+	
+	public void testDeleteAllData()
+	{
+		DataProvider db = new DataProvider(mContext);
+		db.save(TestHelper.getRandomIdea());
+		db.save(TestHelper.getRandomIdea());
+		db.save(TestHelper.getRandomIdea());
+		
+		assertEquals(3,db.getIdeas().size());
+		db.deleteAllData();
+		assertEquals(0,db.getIdeas().size());
 	}
 	
 	public void testDatabaseTablesStructureDefinitionAllTables()

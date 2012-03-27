@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.scurab.android.idearecorder.R;
-import com.scurab.android.idearecorder.R.string;
 import com.scurab.android.idearecorder.model.Idea;
 
 import android.content.ContentValues;
@@ -190,6 +189,14 @@ public class DataProvider extends SQLiteOpenHelper
 				new String[] {String.valueOf(id)});		
 	}
 
-	
+	public void deleteAllData()
+	{
+		SQLiteDatabase db = getWritableDatabase();
+		for(String table : Structure.ALL_TABLES)
+		{
+			String sql = String.format("DELETE FROM [%s];",table);
+			db.execSQL(sql);
+		}
+	}
 		
 }

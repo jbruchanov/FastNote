@@ -4,48 +4,52 @@ package com.scurab.android.idearecorder.presenter;
 
 import java.util.List;
 
-import junit.framework.TestCase;
-
 import com.scurab.android.idearecorder.R;
 import com.scurab.android.idearecorder.TestHelper;
 import com.scurab.android.idearecorder.activity.MainActivity;
-import com.scurab.android.idearecorder.adapter.IdeaListAdapter;
-import com.scurab.android.idearecorder.help.HelpButton;
+import com.scurab.android.idearecorder.help.HelpContextMenu;
 import com.scurab.android.idearecorder.help.HelpImageButton;
 import com.scurab.android.idearecorder.help.HelpListView;
+import com.scurab.android.idearecorder.help.HelpMenuItem;
+import com.scurab.android.idearecorder.interfaces.OnContextItemSelectedListener;
 import com.scurab.android.idearecorder.model.Idea;
 import com.scurab.android.idearecorder.tools.DataProvider;
 
 import android.content.Context;
-import android.database.DatabaseUtils;
 import android.test.AndroidTestCase;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Adapter;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ListAdapter;
+import android.view.View.OnCreateContextMenuListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 
 public class MainActivityPresenterTest extends AndroidTestCase
 {
-
+	DataProvider db = null;
+	@Override
+	public void setContext(Context context)
+	{
+		super.setContext(context);
+		db = new DataProvider(mContext);
+		if(db.getTables().size() == 0)
+			db.onCreate(db.getWritableDatabase());
+	}
+	
 	@Override
 	protected void setUp() throws Exception
 	{	
 		super.setUp();
-		DataProvider db = new DataProvider(mContext);		
-		db.dropAllTables();
-		db.onCreate(db.getWritableDatabase());
+		db.deleteAllData();
 	}
 	
 	@Override
 	protected void tearDown() throws Exception
 	{	
 		super.tearDown();
-		DataProvider db = new DataProvider(mContext);
-		db.dropAllTables();
+		db.deleteAllData();
 	}
 	
 	 public void testBindingListView()
@@ -57,7 +61,7 @@ public class MainActivityPresenterTest extends AndroidTestCase
 	 
 	 public void testBindingButtons()
 	 {
-		 MainActivity ma = new MockMainActivity1();
+		 MainActivity ma = new MockMainActivity1();		 
 		 MainActivityPresenter map = new MainActivityPresenter(ma);
 		 assertNotNull(((HelpImageButton)ma.getWriteIdeaButton()).getOnClickListener());
 		 assertNotNull(((HelpImageButton)ma.getAudioIdeaButton()).getOnClickListener());
@@ -79,9 +83,7 @@ public class MainActivityPresenterTest extends AndroidTestCase
 	 public void testLoadData()
 	 {
 		 MockMainActivity2 ma = new MockMainActivity2();
-		 ma.attachBaseContext(mContext);
 		 ma.init();
-		 DataProvider db = new DataProvider(mContext);		
 		 List<Idea> data = TestHelper.getRandomIdeas(10);
  		 for(Idea i : data)
 			 db.save(i);
@@ -93,6 +95,53 @@ public class MainActivityPresenterTest extends AndroidTestCase
 		 assertEquals(data.size(),ma.getListView().getAdapter().getCount());
 	 }
 	 
+	 public void testRegisterForCreateContextMenu()
+	 {
+		 MockMainActivity2 ma = new MockMainActivity2();
+		 ma.init();
+		 MainActivityPresenter map = new MainActivityPresenter(ma);
+		 assertEquals(ma.getListView(), ma.contextMenuListener);
+	 }
+	 
+	 public void testBindForCreateContextMenu()
+	 {
+		 MockMainActivity2 ma = new MockMainActivity2();
+		 ma.init();
+		 MainActivityPresenter map = new MainActivityPresenter(ma);
+		 assertNotNull(ma.createListener);
+	 }
+	 
+	 public void testBindOnSelectContextMenuItem()
+	 {
+		 MockMainActivity2 ma = new MockMainActivity2();
+		 ma.init();
+		 MainActivityPresenter map = new MainActivityPresenter(ma);
+		 assertNotNull(ma.itemClickListener);
+	 }
+	 
+	 public void testDeleteIdeaByContextMenu()
+	 {
+		 MockMainActivity2 ma = new MockMainActivity2();
+		 ma.init();
+		 List<Idea> data = TestHelper.getRandomIdeas(1);
+ 		 for(Idea i : data)
+			 db.save(i);
+		 
+ 		 assertEquals(1,db.getIdeas().size());
+ 		 
+		 MainActivityPresenter map = new MainActivityPresenter(ma);
+		 map.loadData();
+		 
+		 HelpMenuItem hmi = new HelpMenuItem();		 
+		 hmi.setMenuInfo(new AdapterContextMenuInfo(null, 0, 0));
+		 hmi.setItemId(R.id.muDelete);		 
+		 map.onContextItemSelected(hmi);
+		 
+		 assertEquals(0,db.getIdeas().size());
+		 
+	 }
+	 
+	 
 	 private class MockMainActivity1 extends MainActivity
 	 {
 		HelpListView hListView = new HelpListView(mContext);
@@ -101,8 +150,10 @@ public class MainActivityPresenterTest extends AndroidTestCase
 		HelpImageButton mAudio = new HelpImageButton(mContext);
 		HelpImageButton mVideo = new HelpImageButton(mContext);
 		
-		
-		
+		public MockMainActivity1()
+		{
+			attachBaseContext(mContext);
+		}
 		@Override
 		public ListView getListView()
 		{
@@ -136,10 +187,13 @@ public class MainActivityPresenterTest extends AndroidTestCase
 	 
 	 private class MockMainActivity2 extends MainActivity
 	 {		 
-		 @Override
-		public void attachBaseContext(Context newBase)
+		 public OnCreateContextMenuListener createListener = null;
+		 public View contextMenuListener = null;
+		 public OnContextItemSelectedListener itemClickListener = null;
+		 
+		public MockMainActivity2()
 		{
-			super.attachBaseContext(newBase);
+			attachBaseContext(mContext);
 		}
 		 
 		 @Override
@@ -154,5 +208,26 @@ public class MainActivityPresenterTest extends AndroidTestCase
 		{
 			 return View.inflate(mContext, R.layout.mainactivity, null);
 		}
+		
+		@Override
+		public void registerForContextMenu(View view)
+		{
+			super.registerForContextMenu(view);
+			contextMenuListener = view;
+		}
+		@Override
+		public void setOnContextMenuCreateListener(OnCreateContextMenuListener listener)
+		{
+			super.setOnContextMenuCreateListener(listener);
+			createListener = listener;
+		}
+		
+		@Override
+		public void setOnContextItemSelectedListener(OnContextItemSelectedListener listener)
+		{
+			super.setOnContextItemSelectedListener(listener);
+			itemClickListener = listener;
+		}
+		
 	 }
 }

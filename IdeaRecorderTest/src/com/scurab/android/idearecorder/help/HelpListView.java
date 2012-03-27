@@ -2,8 +2,6 @@ package com.scurab.android.idearecorder.help;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.View.OnClickListener;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 public class HelpListView extends ListView
