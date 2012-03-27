@@ -32,7 +32,10 @@ public class DataproviderTest extends AndroidTestCase
 	protected void tearDown() throws Exception
 	{	
 		super.tearDown();
-		db.deleteAllData();
+		if(db.getTables().size() == 0)
+			db.onCreate(db.getWritableDatabase());
+		else
+			db.deleteAllData();
 	}
 	
 	public void testGetDatabase()
