@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+    <TextView
+        android:id="@+id/tvTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textSize="72dip"
+        android:padding="15dip"
+        android:text="00:00"
+        />
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <ImageButton android:id="@+id/btnStop"
+            android:layout_height="wrap_content"
+            android:layout_width="0dip"
+            android:src="@drawable/ico_player_stop"
+            android:layout_weight="1"
+            />
+        <ImageButton android:id="@+id/btnPlay"
+            android:layout_height="wrap_content"
+            android:layout_width="0dip"
+            android:src="@drawable/ico_player_play"
+            android:layout_weight="1"
+            />
+        <ImageButton android:id="@+id/btnRecord"
+            android:layout_height="wrap_content"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:src="@drawable/ico_player_record"
+            />        
+    </LinearLayout>
+</LinearLayout>

@@ -9,7 +9,7 @@ import junit.framework.TestCase;
 
 public class ByHand extends AndroidTestCase
 {
-	int debug = 0;
+	int debug = 1;
 	@Override
 	protected void setUp() throws Exception
 	{
@@ -22,10 +22,20 @@ public class ByHand extends AndroidTestCase
 	public void testAddItems()
 	{
 		if(debug == 0)
-			return;
+		{
 		
 		DataProvider db = new DataProvider(mContext);
-		for(int i = 0;i<10;i++)
+		for(int i = 0;i<500;i++)
 			db.save(TestHelper.getRandomIdea());
+		}
+	}
+	
+	public void testDeleteAllTables()
+	{
+		if(debug == 1)
+		{
+			DataProvider db = new DataProvider(mContext);
+			db.deleteAllData();
+		}
 	}
 }

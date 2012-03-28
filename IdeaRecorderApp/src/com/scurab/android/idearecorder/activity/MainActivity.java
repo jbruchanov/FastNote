@@ -1,15 +1,10 @@
 package com.scurab.android.idearecorder.activity;
 
 import com.scurab.android.idearecorder.R;
-import com.scurab.android.idearecorder.interfaces.OnContextItemSelectedListener;
 import com.scurab.android.idearecorder.presenter.MainActivityPresenter;
 
 import android.os.Bundle;
-import android.view.ContextMenu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ContextMenu.ContextMenuInfo;
-import android.view.View.OnCreateContextMenuListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageButton;
@@ -46,6 +41,7 @@ public class MainActivity extends BaseActivity
 		mVideo = (ImageButton) mContentView.findViewById(R.id.btnVideo);
 	}
 	
+	@Override
 	protected View getContentView()
 	{
 		View v = mContentView;

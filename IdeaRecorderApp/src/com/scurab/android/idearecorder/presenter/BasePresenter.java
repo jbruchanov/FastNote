@@ -1,11 +1,8 @@
 package com.scurab.android.idearecorder.presenter;
 
-import android.content.Context;
 import android.content.Intent;
 
-import com.scurab.android.idearecorder.IdeaRecorderApplication;
 import com.scurab.android.idearecorder.activity.BaseActivity;
-import com.scurab.android.idearecorder.tools.DataProvider;
 
 public abstract class BasePresenter extends AppPresenter
 {
