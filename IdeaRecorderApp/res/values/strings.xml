@@ -7,5 +7,7 @@
     <string name="txtIdeaRecorderName">Idea Recorder - Name</string>
     <string name="txtIdeaRecorderDescription">Idea Recorder - Description</string>
     <string name="errInvalidValueMissingArg0">Invalid values, missing %1$s</string>
+    <string name="errUnableToMoveFile">Unable to move file!</string>
+    <string name="txtStopActivityFirst">Stop playing/recording first!</string>
 
 </resources>

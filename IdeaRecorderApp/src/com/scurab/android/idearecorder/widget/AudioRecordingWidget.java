@@ -357,4 +357,23 @@ public class AudioRecordingWidget extends LinearLayout
 			mTime.setText(time);
 		}
 	}
+
+	/**
+	 * For readonly state, record button is not visible!
+	 * @param b
+	 */
+	public void setReadOnly(boolean b)
+	{
+		mRecordButton.setVisibility(b ? View.GONE : View.VISIBLE);
+		if(mRecorder.isPlaying())
+			mRecorder.stopPlaying();
+		if(mRecorder.isRecording())
+			mRecorder.stopRecording();
+		setState(STATE_WAITING_FOR_PLAY_OR_RECORD);
+	}
+
+	public void release()
+	{
+		mRecorder.release();
+	}
 }

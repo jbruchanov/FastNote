@@ -111,6 +111,9 @@ public class MainActivityPresenter extends BasePresenter implements OnCreateCont
 			case Idea.TYPE_TEXT:
 				c = WriteActivity.class;
 				break;
+			case Idea.TYPE_AUDIO:
+				c = SpeechActivity.class;
+				break;
 		}
 		return c;
 	}

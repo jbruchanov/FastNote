@@ -3,4 +3,5 @@
     <string name="lblDelete">Delete</string>
     <string name="lblName">Name</string>    
     <string name="lblDescription">Description</string>
+    <string name="lblAudioRecord">AudioRecord</string>
 </resources>

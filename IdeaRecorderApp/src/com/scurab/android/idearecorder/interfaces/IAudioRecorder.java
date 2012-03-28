@@ -26,4 +26,6 @@ public interface IAudioRecorder
 	public void stopPlaying();
 	
 	public void setOnStopPlayingListener(OnStopPlayingListener listener);
+	
+	public String getFile();
 }

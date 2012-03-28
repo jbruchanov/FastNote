@@ -95,4 +95,37 @@ public class StringToolsTest  extends TestCase
 		String result = StringTools.nullIfTrimmedEmpty(value);
 		assertEquals(value, result);
 	}
+	
+	
+	public void testGetFileNameFromIdeaNameNull()
+	{
+		String value = null;
+		String expected = "";
+		String result = StringTools.getFileNameFromIdeaName(value);
+		assertEquals(expected,result);
+	}
+	
+	public void testGetFileNameFromIdeaNameEmptyString()
+	{
+		String value = "";
+		String expected = "";
+		String result = StringTools.getFileNameFromIdeaName(value);
+		assertEquals(expected,result);
+	}
+	
+	public void testGetFileNameFromIdeaNameSimpleString()
+	{
+		String value = "123456abcde";
+		String expected = "123456abcde";
+		String result = StringTools.getFileNameFromIdeaName(value);
+		assertEquals(expected,result);
+	}
+	
+	public void testGetFileNameFromIdeaNameComplexString()
+	{
+		String value = " a asd sdfa\n ěščáíě\t ůšěč§pú§ů.šě+čav";
+		String expected = "aasdsdfaěščáíěůšěčpúůšěčav";
+		String result = StringTools.getFileNameFromIdeaName(value);
+		assertEquals(expected,result);
+	}
 }

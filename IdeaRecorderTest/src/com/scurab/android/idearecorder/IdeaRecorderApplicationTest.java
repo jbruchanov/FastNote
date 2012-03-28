@@ -1,6 +1,8 @@
 package com.scurab.android.idearecorder;
 
 import android.content.Context;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.test.AndroidTestCase;
 
 public class IdeaRecorderApplicationTest extends AndroidTestCase
@@ -15,5 +17,11 @@ public class IdeaRecorderApplicationTest extends AndroidTestCase
 	{
 		IdeaRecorderApplication c = (IdeaRecorderApplication) getContext().getApplicationContext();
 		assertNotNull(c.getDatabase());
+	}
+	
+	public void testGetMediaFolder()
+	{
+		IdeaRecorderApplication c = (IdeaRecorderApplication) getContext().getApplicationContext();
+		assertEquals("/mnt/sdcard/Android/data/com.scurab.android.idearecorder/files/Pictures",c.getMediaFolder(Environment.DIRECTORY_PICTURES));
 	}
 }

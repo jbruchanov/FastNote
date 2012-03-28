@@ -11,7 +11,7 @@ public class SpeechActivityTest extends AndroidTestCase
 		mw.init();
 		assertNotNull(mw.getNameEditText());
 		assertNotNull(mw.getNameRecordButton());
-		assertNotNull(mw.getRecordingWidget());
+		assertNotNull(mw.getAudioRecordingWidget());
 		assertNotNull(mw.getSaveButton());
 		assertNotNull(mw.getCancelButton());
 	}

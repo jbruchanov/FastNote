@@ -24,4 +24,19 @@ public class StringTools
 		else
 			return value;
 	}
+
+
+	public static String getFileNameFromIdeaName(String value)
+	{
+		if(isNullOrEmpty(value))
+			return "";
+		
+		StringBuilder sb = new StringBuilder();
+		for(char c : value.toCharArray())
+		{
+			if(Character.isLetterOrDigit(c))
+				sb.append(c);
+		}
+		return sb.toString();
+	}
 }

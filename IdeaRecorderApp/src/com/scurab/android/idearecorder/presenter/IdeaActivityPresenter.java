@@ -56,7 +56,6 @@ public abstract class IdeaActivityPresenter extends BasePresenter implements OnA
 		
 		mContext.getCancelButton().setOnClickListener(new OnClickListener()
 		{
-
 			@Override
 			public void onClick(View v)
 			{

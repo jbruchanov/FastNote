@@ -1,6 +1,7 @@
 package com.scurab.android.idearecorder.activity;
 
 import com.scurab.android.idearecorder.R;
+import com.scurab.android.idearecorder.presenter.SpeechActivityPresenter;
 import com.scurab.android.idearecorder.tools.AudioRecorder;
 import com.scurab.android.idearecorder.widget.AudioRecordingWidget;
 
@@ -25,6 +26,7 @@ public class SpeechActivity extends BaseIdeaActivity
 		super.onCreate(savedInstanceState);
 		init();
 		setContentView(mContentView);
+		new SpeechActivityPresenter(this);
 	}
 
 	protected void init()
@@ -37,7 +39,6 @@ public class SpeechActivity extends BaseIdeaActivity
 		mCancelButton = (ImageButton)mContentView.findViewById(R.id.btnCancel);
 		
 		mAudioRecordingWidget = (AudioRecordingWidget)mContentView.findViewById(R.id.audioRecordingWidget);
-		mAudioRecordingWidget.setAudioRecorder(new AudioRecorder("/sdcard/hovno"));
 	}
 
 	@Override
@@ -56,7 +57,7 @@ public class SpeechActivity extends BaseIdeaActivity
 		return mNameRecordButton;
 	}
 	
-	public AudioRecordingWidget getRecordingWidget()
+	public AudioRecordingWidget getAudioRecordingWidget()
 	{
 		return  mAudioRecordingWidget;
 	}

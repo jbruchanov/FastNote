@@ -13,6 +13,7 @@ import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Environment;
 import android.test.AndroidTestCase;
+import android.view.View;
 import android.widget.ImageButton;
 
 public class AudioRecordingWidgetTest extends AndroidTestCase
@@ -62,6 +63,13 @@ public class AudioRecordingWidgetTest extends AndroidTestCase
 		assertFalse(isEnabled(arw,R.id.btnPlay));
 		assertTrue(isEnabled(arw,R.id.btnRecord));
 		assertEquals(AudioRecordingWidget.STATE_WAITING_FOR_RECORDING, arw.getState());
+	}
+	
+	public void testInitStateReadOnly()
+	{
+		AudioRecordingWidget arw = new AudioRecordingWidget(mContext);
+		arw.setReadOnly(true);
+		assertEquals(View.GONE, arw.findViewById(R.id.btnRecord).getVisibility());
 	}
 	
 	public void testRecordingState()
@@ -272,8 +280,13 @@ public class AudioRecordingWidgetTest extends AndroidTestCase
 		@Override
 		public void setOnStopPlayingListener(OnStopPlayingListener listener)
 		{
-			// TODO Auto-generated method stub
 			
+		}
+
+		@Override
+		public String getFile()
+		{
+			return null;
 		}		
 	}
 
