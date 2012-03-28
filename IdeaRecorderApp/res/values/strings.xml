@@ -2,7 +2,10 @@
 <resources>
 
     <string name="hello">Hello World!</string>
-    <string name="app_name">IdeaRecorderApp</string>
+    <string name="app_name">Idea Recorder</string>
+        
+    <string name="txtIdeaRecorderName">Idea Recorder - Name</string>
+    <string name="txtIdeaRecorderDescription">Idea Recorder - Description</string>
     <string name="errInvalidValueMissingArg0">Invalid values, missing %1$s</string>
 
 </resources>
