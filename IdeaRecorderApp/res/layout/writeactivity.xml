@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_below="@id/tvName"
-            android:src="@drawable/ic_launcher" />
+            android:src="@drawable/ico_microphone" />
         <EditText
             android:id="@+id/etName"
             android:layout_width="fill_parent"
@@ -47,19 +47,19 @@
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/ic_launcher" />
+            android:src="@drawable/ico_cancel" />
 		<ImageButton
             android:id="@+id/btnDescriptionToText"
             android:layout_height="wrap_content"
             android:layout_width="0dip"
             android:layout_weight="1"
-            android:src="@drawable/ic_launcher" />
+            android:src="@drawable/ico_microphone" />
         <ImageButton
             android:id="@+id/btnSave"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1.5"
-            android:src="@drawable/ic_launcher" />
+            android:src="@drawable/ico_ok" />
     </LinearLayout>
     
     <LinearLayout

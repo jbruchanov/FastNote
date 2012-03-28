@@ -14,29 +14,29 @@
         <ImageButton
             android:id="@+id/btnWrite"
             android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_launcher"
+            android:layout_height="match_parent"
+            android:src="@drawable/ico_pencil"
             android:layout_weight="1" />
 
         <ImageButton
             android:id="@+id/btnAudio"
             android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_launcher"
+            android:layout_height="match_parent"
+            android:src="@drawable/ico_microphone"
             android:layout_weight="1" />
 
         <ImageButton
             android:id="@+id/btnPhoto"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_launcher"
+            android:src="@drawable/ico_photocamera"
             android:layout_weight="1" />
 
         <ImageButton
             android:id="@+id/btnVideo"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_launcher"
+            android:src="@drawable/ico_videocamera"
             android:layout_weight="1" />
     </LinearLayout>
 
