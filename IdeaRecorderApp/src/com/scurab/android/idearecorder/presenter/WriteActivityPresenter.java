@@ -18,30 +18,20 @@ import com.scurab.android.idearecorder.model.Idea;
 import com.scurab.android.idearecorder.tools.DataProvider;
 import com.scurab.android.idearecorder.tools.StringTools;
 
-public class WriteActivityPresenter extends BasePresenter implements OnActivityResultListener
+public class WriteActivityPresenter extends IdeaActivityPresenter implements OnActivityResultListener
 {
 	private WriteActivity mContext = null;
-	private DataProvider mDataProvider = null;
-	private Idea mUpdatingIdea = null;
+	private Idea mUpdatingIdea;
 	
 	public WriteActivityPresenter(WriteActivity context)
 	{
 		super(context);
 		mContext = context;
-		mDataProvider = getDatabase();
 		bind();
 	}
 	
 	protected void bind()
 	{
-		mContext.getNameRecordButton().setOnClickListener(new OnClickListener()
-		{
-			@Override
-			public void onClick(View v)
-			{
-				onNameToText();
-			}
-		});
 		mContext.getDescriptionRecorderButton().setOnClickListener(new OnClickListener()
 		{
 			@Override
@@ -51,84 +41,24 @@ public class WriteActivityPresenter extends BasePresenter implements OnActivityR
 			}
 		});
 		
-		mContext.getSaveButton().setOnClickListener(new OnClickListener()
-		{
-			@Override
-			public void onClick(View v)
-			{
-				onSave();
-			}
-		});
-		
-		mContext.getCancelButton().setOnClickListener(new OnClickListener()
-		{
-
-			@Override
-			public void onClick(View v)
-			{
-				onCancel();
-			}
-		});
-		
 		initSpeechRecognition();
-		initIntent();
-		mContext.setOnActivityResultListener(this);
-		
 	}
 	
+	@Override
 	protected void initSpeechRecognition()
 	{
+		super.initSpeechRecognition();
 		boolean has = hasPhoneSpeechRecognition();
-		mContext.getNameRecordButton().setEnabled(has);
 		mContext.getDescriptionRecorderButton().setEnabled(has);
 	}
 	
-	protected void initIntent()
-	{
-		Intent i = mContext.getIntent();
-		if(i != null && i.hasExtra(I.Constants.IDEA_ID))
-		{
-			long id =  i.getLongExtra(I.Constants.IDEA_ID, 0);
-			if(id != 0)
-			{
-				mUpdatingIdea = mDataProvider.getIdea(id);
-				mContext.getNameEditText().setText(mUpdatingIdea.getName());
-				mContext.getDescriptionEditText().setText(mUpdatingIdea.getDescription());
-			}
-		}
-	}
-
-	
-	private boolean hasPhoneSpeechRecognition()
-	{
-		PackageManager pm = mContext.getPackageManager();
-        List<ResolveInfo> activities = pm.queryIntentActivities(new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH), 0);
-        return activities.size() != 0;
-	}
-
-	public void onNameToText()
-	{
-		try
-		{
-			startSpeechRecognition(I.Constants.VOICE_RECOGNITION_REQUEST_CODE_NAME);
-		}
-		catch(Exception e)
-		{
-			showError(e);
-		}
-	}
-	
-	private void startSpeechRecognition(int src)
-	{
-		Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getClass().getPackage().getName());
-        if(src == I.Constants.VOICE_RECOGNITION_REQUEST_CODE_NAME)
-        	intent.putExtra(RecognizerIntent.EXTRA_PROMPT, getString(R.string.txtIdeaRecorderName));
-        else if(src == I.Constants.VOICE_RECOGNITION_REQUEST_CODE_DESCRIPTION)
-        	intent.putExtra(RecognizerIntent.EXTRA_PROMPT, getString(R.string.txtIdeaRecorderName));
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 1);	        
-        startActivityForResult(intent, src);
+	@Override
+	protected void onLoadedIdea(Idea i)
+	{		
+		super.onLoadedIdea(i);
+		mUpdatingIdea = i;
+		//don't use context, it's not initialized yet
+		((WriteActivity)getContext()).getDescriptionEditText().setText(i.getDescription());
 	}
 
 	public void onDescriptionToText()
@@ -143,6 +73,7 @@ public class WriteActivityPresenter extends BasePresenter implements OnActivityR
 		}
 	}
 
+	@Override
 	public boolean onSave()
 	{
 		boolean result = false;
@@ -177,50 +108,24 @@ public class WriteActivityPresenter extends BasePresenter implements OnActivityR
 		i.setName(name);
 		i.setPath(null);
 		i.setSaveTime(System.currentTimeMillis());
-		
 		return i;
-	}
-
-	public void onCancel()
-	{
-		try
-		{
-			finish();
-		}
-		catch(Exception e)
-		{
-			showError(e);
-		}
 	}
 
 	@Override
 	public boolean onActivityResult(int requestCode, int resultCode, Intent data)
 	{
-		boolean handled = false;
-		if(resultCode == Activity.RESULT_OK)
-		{
-			List<String> d = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-			String value = null;
-			if(d.size() > 0)
-				value = d.get(0);
-			if (requestCode == I.Constants.VOICE_RECOGNITION_REQUEST_CODE_NAME) 
+		boolean handled = super.onActivityResult(requestCode, resultCode, data);
+		if(!handled && resultCode == Activity.RESULT_OK)
+		{			
+			if(requestCode == I.Constants.VOICE_RECOGNITION_REQUEST_CODE_DESCRIPTION)
 			{
-				onRecognizedNameValue(value);
-				handled = true;
-	        }
-			else if(requestCode == I.Constants.VOICE_RECOGNITION_REQUEST_CODE_DESCRIPTION)
-			{
-				onRecognizedDescriptionValue(value);
+				onRecognizedDescriptionValue(getRecognizedTextFromSpeech(data));
 				handled = true;
 			}
 		}        
 		return handled;
 	}	
 	
-	protected void onRecognizedNameValue(String value)
-	{
-		mContext.getNameEditText().setText(value);
-	}
 	
 	protected void onRecognizedDescriptionValue(String value)
 	{
