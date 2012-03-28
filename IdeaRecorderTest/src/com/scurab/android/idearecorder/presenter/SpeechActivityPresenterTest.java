@@ -100,6 +100,8 @@ public class SpeechActivityPresenterTest extends AndroidTestCase
 		assertTrue(f.length() > 0);
 	}
 	
+	
+	
 	public void testCloseWhenPlaying() throws InterruptedException
 	{
 		MockSpeechActivity msa = new MockSpeechActivity();
@@ -161,6 +163,44 @@ public class SpeechActivityPresenterTest extends AndroidTestCase
 		assertEquals(file, sap.audioRecorder.getFile());
 		assertEquals(View.GONE, msa.getAudioRecordingWidget().findViewById(R.id.btnRecord).getVisibility());
 		assertEquals(AudioRecordingWidget.STATE_WAITING_FOR_PLAY_OR_RECORD,msa.getAudioRecordingWidget().getState());
+	}
+	
+	public void testUpdateOk() throws InterruptedException, IllegalStateException, IOException
+	{
+		Idea i = TestHelper.getRandomIdea();
+		i.setIdeaType(Idea.TYPE_AUDIO);
+		String file = TEMP_FILE; 				
+		AudioRecorder ar = new AudioRecorder(file);
+		ar.startRecording();
+		Thread.sleep(1000);
+		ar.stopRecording();
+		ar.release();
+		i.setPath(file);
+		dp.save(i);
+		
+		Intent intent = new Intent(mContext, SpeechActivity.class);
+		intent.putExtra(I.Constants.IDEA_ID, i.getId());
+		
+		
+		MockSpeechActivity msa = new MockSpeechActivity();
+		msa.setIntent(intent);
+		msa.init();
+		MockSpeechActivityPresenter sap = new MockSpeechActivityPresenter(msa);
+		
+		String newName = UUID.randomUUID().toString();
+		msa.getNameEditText().setText(newName);
+		assertTrue(sap.onSave());
+		
+		Idea ifdb = dp.getIdea(i.getId());
+		assertEquals(newName,ifdb.getName());
+		assertEquals(file,ifdb.getPath());
+		
+		String path = i.getPath();
+		File f = new File(path);
+		
+		assertTrue(f.exists());
+		assertTrue(f.isFile());
+		assertTrue(f.length() > 0);
 	}
 	
 	private class MockSpeechActivity extends SpeechActivity

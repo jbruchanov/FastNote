@@ -86,6 +86,7 @@ public class WriteActivityPresenter extends IdeaActivityPresenter implements OnA
 				mDataProvider.save(i);
 			finish();
 			result = true;
+			finish();
 		}
 		catch(Exception e)
 		{

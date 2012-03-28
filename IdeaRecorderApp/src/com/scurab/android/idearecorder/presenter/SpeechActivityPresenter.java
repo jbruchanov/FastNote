@@ -3,7 +3,9 @@ package com.scurab.android.idearecorder.presenter;
 import java.io.File;
 import java.io.IOException;
 
+import android.content.Intent;
 import android.os.Environment;
+import android.view.View;
 
 import com.scurab.android.idearecorder.IdeaRecorderApplication;
 import com.scurab.android.idearecorder.R;
@@ -39,6 +41,9 @@ public class SpeechActivityPresenter extends IdeaActivityPresenter implements On
 		}
 		
 		mContext.setOnActivityStateChangeListener(this);
+		initSpeechRecognition();
+		
+		mContext.getNameRecordButton().setVisibility(View.GONE);//some bug record by this and by then recorder
 	}
 	
 	protected IAudioRecorder getAudioRecorder(String file)
@@ -105,19 +110,28 @@ public class SpeechActivityPresenter extends IdeaActivityPresenter implements On
 	}
 	
 	private Idea getOrcreateIdea() throws IllegalAccessException, IOException
-	{
+	{		
 		if(!checkFile())
 			throw new IllegalAccessException(getString(R.string.errInvalidValueMissingArg0, getString(R.string.lblAudioRecord)));
 		String name = StringTools.nullIfTrimmedEmpty(mContext.getNameEditText().getText().toString().trim());
 		if(name == null)
 			throw new IllegalArgumentException(getString(R.string.errInvalidValueMissingArg0, getString(R.string.lblName)));
 		
-		Idea i = new Idea();
-		i.setDescription(null);
-		i.setIdeaType(Idea.TYPE_AUDIO);
-		i.setName(name);
-		String realPath = moveTempFile();
-		i.setPath(realPath);
+		Idea i = null;
+		if(mUpdatingIdea == null)
+		{
+			i = new Idea();
+			i.setDescription(null);
+			i.setIdeaType(Idea.TYPE_AUDIO);
+			i.setName(name);
+			String realPath = moveTempFile();
+			i.setPath(realPath);
+		}
+		else
+		{
+			i = mUpdatingIdea;
+			i.setName(name);
+		}
 		i.setSaveTime(System.currentTimeMillis());
 		return i;
 	}

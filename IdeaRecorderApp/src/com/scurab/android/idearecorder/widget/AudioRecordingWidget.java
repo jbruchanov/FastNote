@@ -365,10 +365,13 @@ public class AudioRecordingWidget extends LinearLayout
 	public void setReadOnly(boolean b)
 	{
 		mRecordButton.setVisibility(b ? View.GONE : View.VISIBLE);
-		if(mRecorder.isPlaying())
-			mRecorder.stopPlaying();
-		if(mRecorder.isRecording())
-			mRecorder.stopRecording();
+		if(mRecorder != null)
+		{
+			if(mRecorder.isPlaying())
+				mRecorder.stopPlaying();
+			if(mRecorder.isRecording())
+				mRecorder.stopRecording();
+		}
 		setState(STATE_WAITING_FOR_PLAY_OR_RECORD);
 	}
 
