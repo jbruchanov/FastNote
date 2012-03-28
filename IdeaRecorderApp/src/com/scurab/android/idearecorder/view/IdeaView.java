@@ -4,9 +4,11 @@ import java.util.Date;
 
 import com.scurab.android.idearecorder.R;
 import com.scurab.android.idearecorder.model.Idea;
+import com.scurab.android.idearecorder.tools.StringTools;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -54,22 +56,41 @@ public class IdeaView extends LinearLayout
 		mItem = item;
 		mName.setText(mItem.getName());
 		mDescription.setText(mItem.getDescription());
+		mDescription.setVisibility(StringTools.isNullOrEmpty(mItem.getDescription()) ? View.GONE : View.VISIBLE);
+			
 		mTime.setText(new Date(mItem.getSaveTime()).toLocaleString());
 		setImageResource(mItem.getIdeaType());
 	}
 	
 	protected void setImageResource(int type)
 	{
-		switch(type)
-		{
-			default:
-				mIcon.setImageResource(R.drawable.ic_launcher);
-		}
+		mIcon.setImageResource(getIconResource(type));
 	}
 
 	public Idea getIdea()
 	{
 		return mItem;
+	}
+	
+	protected int getIconResource(int type)
+	{
+		int result = 0;
+		switch(type)
+		{
+			case Idea.TYPE_TEXT:
+				result = R.drawable.ico_pencil;
+				break;
+			case Idea.TYPE_AUDIO:
+				result = R.drawable.ico_microphone;
+				break;
+			case Idea.TYPE_IMAGE:
+				result = R.drawable.ico_photocamera;
+				break;
+			case Idea.TYPE_VIDEO:
+				result = R.drawable.ico_videocamera;
+				break;
+		}
+		return result;
 	}
 
 }

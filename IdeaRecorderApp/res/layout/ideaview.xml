@@ -2,7 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="@drawable/ideaviewbackground"
+    android:paddingBottom="5dip" >
     <ImageView
         android:id="@+id/ivIcon"
         android:layout_width="wrap_content"
@@ -12,7 +14,6 @@
         android:paddingLeft="5dip"
         android:paddingRight="5dip"
         android:layout_centerVertical="true" />
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -23,18 +24,23 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="14:45 27.3.2012"
+            android:textColor="#202020"
             android:textSize="9sp"
+            android:paddingRight="5dip"
+            android:textStyle="italic"
             android:gravity="right" />
         <TextView android:id="@+id/tvName"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textStyle="bold"
+            android:textColor="#000000"
             android:text="Name" />
 
         <TextView android:id="@+id/tvDescription"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:textColor="#101010"
             android:text="Description Description Description Description Description" />
-        
     </LinearLayout>
 </RelativeLayout>

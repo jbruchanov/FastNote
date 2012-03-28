@@ -94,11 +94,19 @@ public class SpeechActivityPresenter extends IdeaActivityPresenter implements On
 		boolean result = false;
 		try
 		{
-			Idea i = getOrcreateIdea();
-			if(mUpdatingIdea != null)
-				mDataProvider.udpate(i);
-			else
+			if(mUpdatingIdea == null)
+			{
+				Idea i = getOrcreateIdea();
 				mDataProvider.save(i);
+			}
+			else
+			{
+				if(!mUpdatingIdea.equals(getIdeaName()))
+				{
+					Idea i = getOrcreateIdea();
+					mDataProvider.udpate(i);
+				}
+			}
 			finish();
 			result = true;
 		}
@@ -109,11 +117,16 @@ public class SpeechActivityPresenter extends IdeaActivityPresenter implements On
 		return result;
 	}
 	
+	private String getIdeaName()
+	{
+		return StringTools.nullIfTrimmedEmpty(mContext.getNameEditText().getText().toString().trim());
+	}
+	
 	private Idea getOrcreateIdea() throws IllegalAccessException, IOException
 	{		
 		if(!checkFile())
 			throw new IllegalAccessException(getString(R.string.errInvalidValueMissingArg0, getString(R.string.lblAudioRecord)));
-		String name = StringTools.nullIfTrimmedEmpty(mContext.getNameEditText().getText().toString().trim());
+		String name = getIdeaName();
 		if(name == null)
 			throw new IllegalArgumentException(getString(R.string.errInvalidValueMissingArg0, getString(R.string.lblName)));
 		
