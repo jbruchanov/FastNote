@@ -3,6 +3,7 @@ package com.scurab.android.idearecorder.presenter;
 import java.io.File;
 import java.io.IOException;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Environment;
 import android.view.View;
@@ -18,18 +19,25 @@ import com.scurab.android.idearecorder.tools.StringTools;
 
 public class SpeechActivityPresenter extends IdeaActivityPresenter implements OnActivityStateChangeListener
 {
-	SpeechActivity mContext = null;
+	SpeechActivity mContext;
 	IAudioRecorder mAudioRecorder;
 	Idea mUpdatingIdea;
 	
 	public SpeechActivityPresenter(SpeechActivity context)
 	{
 		super(context);
-		mContext = context;
+		
 		bind();
 	}
 	
-	public void bind()
+	@Override
+	protected void onAttachContext(Context context)
+	{	
+		mContext = (SpeechActivity) context;
+		super.onAttachContext(context);
+	}
+	
+	private void bind()
 	{
 		if(mAudioRecorder == null) //is not null if is initialized by existing value in onLoaded
 			mAudioRecorder = getAudioRecorder(null);

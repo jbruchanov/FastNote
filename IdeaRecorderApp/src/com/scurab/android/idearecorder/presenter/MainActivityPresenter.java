@@ -25,7 +25,7 @@ import com.scurab.android.idearecorder.tools.DataProvider;
 
 public class MainActivityPresenter extends BasePresenter implements OnCreateContextMenuListener, OnContextItemSelectedListener, OnActivityStateChangeListener
 {
-	private MainActivity mContext = null;
+	private MainActivity mContext;
 	private DataProvider mDataProvider = null;
 	
 	public MainActivityPresenter(MainActivity activity)

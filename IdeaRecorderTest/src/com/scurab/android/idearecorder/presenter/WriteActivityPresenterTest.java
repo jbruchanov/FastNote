@@ -243,7 +243,7 @@ public class WriteActivityPresenterTest extends AndroidTestCase
 		assertEquals(i.getDescription(),mwa.getDescriptionEditText().getText().toString());
 	}
 	
-	public void testOpenItemToEditAndSave()
+	public void testOpenItemToEditAndSave() throws InterruptedException
 	{
 		Idea i = TestHelper.getRandomIdea();
 		i.setSaveTime(System.currentTimeMillis());
@@ -260,6 +260,7 @@ public class WriteActivityPresenterTest extends AndroidTestCase
 		mwa.getNameEditText().setText(i2.getName());
 		mwa.getDescriptionEditText().setText(i2.getDescription());
 		
+		Thread.sleep(100);//just w8 few msecs
 		assertTrue(wap.onSave());
 		
 		Idea fromDb = dp.getIdea(i.getId());

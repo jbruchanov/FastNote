@@ -8,13 +8,18 @@ import com.scurab.android.idearecorder.tools.DataProvider;
 
 public abstract class AppPresenter
 {
-	private Context mContext = null;
+	private Context mContext;
 	private IdeaRecorderApplication mApplication = null;
 	
 	public AppPresenter(Context context)
 	{
-		mContext = context;
+		onAttachContext(context);
 		mApplication = (IdeaRecorderApplication) mContext.getApplicationContext();
+	}
+	
+	protected void onAttachContext(Context context)
+	{
+		mContext = context;
 	}
 	
 	public DataProvider getDatabase()

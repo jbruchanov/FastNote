@@ -3,6 +3,7 @@ package com.scurab.android.idearecorder.presenter;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -20,14 +21,20 @@ import com.scurab.android.idearecorder.tools.StringTools;
 
 public class WriteActivityPresenter extends IdeaActivityPresenter implements OnActivityResultListener
 {
-	private WriteActivity mContext = null;
+	private WriteActivity mContext;
 	private Idea mUpdatingIdea;
 	
 	public WriteActivityPresenter(WriteActivity context)
 	{
 		super(context);
-		mContext = context;
 		bind();
+	}
+	
+	@Override
+	protected void onAttachContext(Context context)
+	{	
+		mContext = (WriteActivity) context;
+		super.onAttachContext(context);		
 	}
 	
 	protected void bind()
@@ -40,7 +47,6 @@ public class WriteActivityPresenter extends IdeaActivityPresenter implements OnA
 				onDescriptionToText();
 			}
 		});
-		
 		initSpeechRecognition();
 	}
 	

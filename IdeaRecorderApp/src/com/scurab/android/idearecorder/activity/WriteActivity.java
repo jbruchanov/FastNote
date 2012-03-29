@@ -24,11 +24,13 @@ public class WriteActivity extends BaseIdeaActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		
 		init();
 		setContentView(mContentView);
-		
-		WriteActivityPresenter wap = new WriteActivityPresenter(this);
+	}
+	
+	protected void initPresenter()
+	{
+		new WriteActivityPresenter(this);
 	}
 	
 	protected void init()
@@ -75,9 +77,11 @@ public class WriteActivity extends BaseIdeaActivity
 	}
 
 	@Override
-	public View getContentView()
+	protected View getContentView()
 	{
-		return View.inflate(this, R.layout.writeactivity, null);
+		if(mContentView == null)
+			mContentView = View.inflate(this, R.layout.writeactivity, null);
+		return mContentView;
 	}
 	
 

@@ -16,7 +16,7 @@ public class DataProvider extends SQLiteOpenHelper
 {
 	private static final String NAME = "IdeaRecorder.sqlite";
 	private static final int VERSION = 1;
-	private Context mContext = null;
+	private Context mContext;
 	
 	public DataProvider(Context context)
 	{

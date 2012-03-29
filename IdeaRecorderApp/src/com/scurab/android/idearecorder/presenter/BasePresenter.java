@@ -1,17 +1,24 @@
 package com.scurab.android.idearecorder.presenter;
 
+import android.content.Context;
 import android.content.Intent;
 
 import com.scurab.android.idearecorder.activity.BaseActivity;
 
 public abstract class BasePresenter extends AppPresenter
 {
-	private BaseActivity mContext = null;
+	private BaseActivity mContext;
 	
 	public BasePresenter(BaseActivity context)
 	{
 		super(context);
-		mContext = context;
+	}
+	
+	@Override
+	protected void onAttachContext(Context context)
+	{
+		mContext = (BaseActivity) context;
+		super.onAttachContext(context);
 	}
 	
 	public void showError(final Throwable t)

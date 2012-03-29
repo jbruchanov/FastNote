@@ -27,23 +27,29 @@ import com.scurab.android.idearecorder.tools.DataProvider;
  */
 public abstract class IdeaActivityPresenter extends BasePresenter implements OnActivityResultListener
 {
-	private BaseIdeaActivity mContext = null;
+	private BaseIdeaActivity mContext;
 	protected DataProvider mDataProvider = null;
 	
 	public IdeaActivityPresenter(BaseIdeaActivity context)
 	{
 		super(context);
-		mContext = context;
 		mDataProvider = getDatabase();
-		bindImpl();
+		bind();
 	}
 	
-	protected BaseIdeaActivity getContext()
+	@Override
+	protected void onAttachContext(Context context)
+	{
+		mContext = (BaseIdeaActivity) context;
+		super.onAttachContext(context);		
+	}
+	
+	protected final BaseIdeaActivity getContext()
 	{
 		return mContext;
 	}
 	
-	private void bindImpl()
+	private void bind()
 	{
 		mContext.getSaveButton().setOnClickListener(new OnClickListener()
 		{
