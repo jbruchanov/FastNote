@@ -10,5 +10,7 @@
     <string name="errUnableToMoveFile">Unable to move file!</string>
     <string name="txtStopActivityFirst">Stop playing/recording first!</string>
     <string name="txtImageNotFound">Image for this record not found!</string>
+    <string name="txtAudioNotFound">Audio for this record not found!</string>
+    <string name="txtVideoNotFound">Video for this record not found!</string>
 
 </resources>

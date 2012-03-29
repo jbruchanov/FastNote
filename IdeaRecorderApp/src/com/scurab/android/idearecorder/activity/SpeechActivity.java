@@ -2,7 +2,6 @@ package com.scurab.android.idearecorder.activity;
 
 import com.scurab.android.idearecorder.R;
 import com.scurab.android.idearecorder.presenter.SpeechActivityPresenter;
-import com.scurab.android.idearecorder.tools.AudioRecorder;
 import com.scurab.android.idearecorder.widget.AudioRecordingWidget;
 
 import android.os.Bundle;
@@ -47,11 +46,13 @@ public class SpeechActivity extends BaseIdeaActivity
 		return View.inflate(this, R.layout.speechactivity, null);
 	}
 	
+	@Override
 	public EditText getNameEditText()
 	{
 		return mNameEditText;
 	}	
 	
+	@Override
 	public ImageButton getNameRecordButton()
 	{
 		return mNameRecordButton;
@@ -62,11 +63,13 @@ public class SpeechActivity extends BaseIdeaActivity
 		return  mAudioRecordingWidget;
 	}
 	
+	@Override
 	public ImageButton getSaveButton()
 	{
 		return mSaveButton;
 	}
 	
+	@Override
 	public ImageButton getCancelButton()
 	{
 		return mCancelButton;

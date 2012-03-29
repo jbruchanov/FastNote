@@ -210,6 +210,7 @@ public class SpeechActivityPresenterTest extends AndroidTestCase
 			attachBaseContext(mContext);
 		}
 		
+		@Override
 		public void init()
 		{
 			super.init();

@@ -25,6 +25,7 @@ public class WriteActivityTest extends AndroidTestCase
 			attachBaseContext(mContext);
 		}
 		
+		@Override
 		public void init()
 		{
 			super.init();

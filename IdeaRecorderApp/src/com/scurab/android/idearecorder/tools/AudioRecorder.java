@@ -3,8 +3,6 @@ package com.scurab.android.idearecorder.tools;
 import java.io.IOException;
 
 import com.scurab.android.idearecorder.interfaces.IAudioRecorder;
-import com.scurab.android.idearecorder.interfaces.IAudioRecorder.OnStopPlayingListener;
-
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaRecorder;

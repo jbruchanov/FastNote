@@ -2,8 +2,6 @@ package com.scurab.android.idearecorder.widget;
 
 import com.scurab.android.idearecorder.R;
 import com.scurab.android.idearecorder.interfaces.IAudioRecorder;
-import com.scurab.android.idearecorder.tools.AudioRecorder;
-
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;

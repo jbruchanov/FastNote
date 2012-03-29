@@ -47,6 +47,7 @@ public class WriteActivity extends BaseIdeaActivity
 		mCancelButton = (ImageButton)mContentView.findViewById(R.id.btnCancel);
 	}
 		
+	@Override
 	public EditText getNameEditText()
 	{
 		return mNameEditText;
@@ -57,6 +58,7 @@ public class WriteActivity extends BaseIdeaActivity
 		return mDescriptionEditText;
 	}
 
+	@Override
 	public ImageButton getNameRecordButton()
 	{
 		return mNameRecordButton;
@@ -67,11 +69,13 @@ public class WriteActivity extends BaseIdeaActivity
 		return mDescriptionRecorderButton;
 	}
 
+	@Override
 	public ImageButton getSaveButton()
 	{
 		return mSaveButton;
 	}
 
+	@Override
 	public ImageButton getCancelButton()
 	{
 		return mCancelButton;

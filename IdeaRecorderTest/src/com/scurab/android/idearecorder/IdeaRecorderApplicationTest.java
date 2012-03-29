@@ -2,7 +2,6 @@ package com.scurab.android.idearecorder;
 
 import android.content.Context;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.test.AndroidTestCase;
 
 public class IdeaRecorderApplicationTest extends AndroidTestCase

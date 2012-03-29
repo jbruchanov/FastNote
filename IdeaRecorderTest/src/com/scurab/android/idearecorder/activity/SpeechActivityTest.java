@@ -1,7 +1,6 @@
 package com.scurab.android.idearecorder.activity;
 
 import android.test.AndroidTestCase;
-import junit.framework.TestCase;
 
 public class SpeechActivityTest extends AndroidTestCase
 {
@@ -23,6 +22,7 @@ public class SpeechActivityTest extends AndroidTestCase
 			attachBaseContext(mContext);
 		}
 		
+		@Override
 		public void init()
 		{
 			super.init();

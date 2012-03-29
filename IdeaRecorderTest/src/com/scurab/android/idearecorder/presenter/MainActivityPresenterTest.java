@@ -9,7 +9,6 @@ import com.scurab.android.idearecorder.R;
 import com.scurab.android.idearecorder.TestHelper;
 import com.scurab.android.idearecorder.activity.MainActivity;
 import com.scurab.android.idearecorder.activity.WriteActivity;
-import com.scurab.android.idearecorder.help.HelpContextMenu;
 import com.scurab.android.idearecorder.help.HelpImageButton;
 import com.scurab.android.idearecorder.help.HelpListView;
 import com.scurab.android.idearecorder.help.HelpMenuItem;
@@ -21,12 +20,9 @@ import com.scurab.android.idearecorder.tools.DataProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.test.AndroidTestCase;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnCreateContextMenuListener;
-import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 

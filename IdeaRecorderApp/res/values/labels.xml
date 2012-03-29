@@ -5,4 +5,7 @@
     <string name="lblDescription">Description</string>
     <string name="lblAudioRecord">AudioRecord</string>
     <string name="lblPhoto">Photo</string>
+    <string name="lblVideo">Video</string>
+    <string name="lblPlzWait">Please wait...</string>
+    <string name="lblSaving">Saving video</string>
 </resources>

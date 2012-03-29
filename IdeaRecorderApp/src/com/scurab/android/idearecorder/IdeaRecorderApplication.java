@@ -3,7 +3,6 @@ package com.scurab.android.idearecorder;
 import com.scurab.android.idearecorder.tools.DataProvider;
 
 import android.app.Application;
-import android.os.Environment;
 
 public class IdeaRecorderApplication extends Application
 {

@@ -1,10 +1,8 @@
 package com.scurab.android.idearecorder.presenter;
 
 import com.scurab.android.idearecorder.R;
-import com.scurab.android.idearecorder.activity.BaseActivity;
 import com.scurab.android.idearecorder.activity.MainActivity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.test.AndroidTestCase;
 
@@ -46,6 +44,7 @@ public class AppPresenterTest extends AndroidTestCase
 			super(context);
 		}
 
+		@Override
 		public void startActivity(Class<?> activityClass)
 		{
 			//super.startActivity(activityClass);

@@ -1,8 +1,6 @@
 package com.scurab.android.idearecorder.presenter;
 
 import android.content.Intent;
-import android.net.Uri;
-import android.provider.MediaStore;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuInflater;
@@ -16,10 +14,10 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import com.scurab.android.idearecorder.I;
 import com.scurab.android.idearecorder.R;
-import com.scurab.android.idearecorder.activity.ImagePreviewActivity;
 import com.scurab.android.idearecorder.activity.MainActivity;
 import com.scurab.android.idearecorder.activity.PhotoActivity;
 import com.scurab.android.idearecorder.activity.SpeechActivity;
+import com.scurab.android.idearecorder.activity.VideoActivity;
 import com.scurab.android.idearecorder.activity.WriteActivity;
 import com.scurab.android.idearecorder.adapter.IdeaListAdapter;
 import com.scurab.android.idearecorder.interfaces.OnActivityStateChangeListener;
@@ -121,6 +119,9 @@ public class MainActivityPresenter extends BasePresenter implements OnCreateCont
 			case Idea.TYPE_IMAGE:
 				c = PhotoActivity.class;
 				break;
+			case Idea.TYPE_VIDEO:
+				c = VideoActivity.class;
+				break;
 		}
 		return c;
 	}
@@ -142,10 +143,7 @@ public class MainActivityPresenter extends BasePresenter implements OnCreateCont
 	
 	public void onVideoIdeaClick()
 	{
-//		Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
-//        intent.putExtra(MediaStore.EXTRA_OUTPUT,  Uri.parse("/sdcard/video"));
-//        intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);
-//        startActivityForResult(intent,123);
+		startActivity(VideoActivity.class);
 	}
 
 	public void loadData()

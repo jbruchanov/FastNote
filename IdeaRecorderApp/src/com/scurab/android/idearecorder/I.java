@@ -11,5 +11,6 @@ public class I
 		public static final String IDEA_ID = "IDEA_ID";
 		public static final String IDEA_IMAGE_PATH = "IDEA_IMAGE_PATH";
 		public static final int REQUEST_TAKE_PHOTO = 0x87971;
+		public static final int REQUEST_TAKE_VIDEO = 0x87972;
 	}
 }

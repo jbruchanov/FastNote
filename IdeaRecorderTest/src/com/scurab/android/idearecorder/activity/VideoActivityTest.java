@@ -2,11 +2,11 @@ package com.scurab.android.idearecorder.activity;
 
 import android.test.AndroidTestCase;
 
-public class PhotoActivityTest extends AndroidTestCase
+public class VideoActivityTest extends AndroidTestCase
 {
 	public void testFindViews()
 	{
-		MockPhotoActivity pa = new MockPhotoActivity();
+		MockVideoActivity pa = new MockVideoActivity();
 		pa.init();
 		
 		assertNotNull(pa.getNameEditText());
@@ -15,13 +15,12 @@ public class PhotoActivityTest extends AndroidTestCase
 		assertNotNull(pa.getDescriptionRecorderButton());
 		assertNotNull(pa.getSaveButton());
 		assertNotNull(pa.getCancelButton());
-		assertNotNull(pa.getImagePreview());
 		assertNotNull(pa.getPhotoButton());
 	}
 	
-	private class MockPhotoActivity extends PhotoActivity
+	private class MockVideoActivity extends VideoActivity
 	{
-		public MockPhotoActivity()
+		public MockVideoActivity()
 		{
 			attachBaseContext(mContext);
 		}

@@ -1,13 +1,11 @@
 package com.scurab.android.idearecorder.presenter;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.scurab.android.idearecorder.I;
 import com.scurab.android.idearecorder.TestHelper;
 import com.scurab.android.idearecorder.activity.WriteActivity;
-import com.scurab.android.idearecorder.help.HelpButton;
 import com.scurab.android.idearecorder.help.HelpImageButton;
 import com.scurab.android.idearecorder.model.Idea;
 import com.scurab.android.idearecorder.tools.DataProvider;
@@ -18,7 +16,6 @@ import android.content.Intent;
 import android.preference.PreferenceManager.OnActivityResultListener;
 import android.speech.RecognizerIntent;
 import android.test.AndroidTestCase;
-import android.widget.EditText;
 import android.widget.ImageButton;
 
 public class WriteActivityPresenterTest extends AndroidTestCase
@@ -285,6 +282,7 @@ public class WriteActivityPresenterTest extends AndroidTestCase
 			attachBaseContext(mContext);
 		}
 		
+		@Override
 		public void init()
 		{
 			super.init();
@@ -297,6 +295,7 @@ public class WriteActivityPresenterTest extends AndroidTestCase
 			return btnNameToText;
 		}
 		
+		@Override
 		public ImageButton getDescriptionRecorderButton()
 		{
 			return btnDescriptionToText;
@@ -329,6 +328,7 @@ public class WriteActivityPresenterTest extends AndroidTestCase
 			attachBaseContext(mContext);
 		}
 		
+		@Override
 		public void init()
 		{
 			super.init();

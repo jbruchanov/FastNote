@@ -1,14 +1,9 @@
 package com.scurab.android.idearecorder.presenter;
 
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.preference.PreferenceManager.OnActivityResultListener;
-import android.speech.RecognizerIntent;
 import android.view.View;
 import android.view.View.OnClickListener;
 
@@ -16,7 +11,6 @@ import com.scurab.android.idearecorder.I;
 import com.scurab.android.idearecorder.R;
 import com.scurab.android.idearecorder.activity.WriteActivity;
 import com.scurab.android.idearecorder.model.Idea;
-import com.scurab.android.idearecorder.tools.DataProvider;
 import com.scurab.android.idearecorder.tools.StringTools;
 
 public class WriteActivityPresenter extends IdeaActivityPresenter implements OnActivityResultListener

@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Environment;
 import android.view.View;
 
@@ -21,7 +20,7 @@ public class SpeechActivityPresenter extends IdeaActivityPresenter implements On
 {
 	SpeechActivity mContext;
 	IAudioRecorder mAudioRecorder;
-	Idea mUpdatingIdea;
+	Idea mUpdatingIdea;	
 	
 	public SpeechActivityPresenter(SpeechActivity context)
 	{
@@ -80,7 +79,11 @@ public class SpeechActivityPresenter extends IdeaActivityPresenter implements On
 	{
 		super.onLoadedIdea(i);
 		mUpdatingIdea = i;
-		mAudioRecorder = getAudioRecorder(i.getPath());		
+		File f = new File(i.getPath());
+		if(f.exists() && f.length() > 0)
+			mAudioRecorder = getAudioRecorder(i.getPath());
+		else
+			showMessage(R.string.txtAudioNotFound);
 	}
 	
 	protected void onUnableToFinish()

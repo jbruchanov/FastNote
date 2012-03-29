@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.os.Environment;
 import android.preference.PreferenceManager.OnActivityResultListener;
 import android.speech.RecognizerIntent;
 import android.view.View;
@@ -146,6 +145,7 @@ public abstract class IdeaActivityPresenter extends BasePresenter implements OnA
         startActivityForResult(intent, src);
 	}
 	
+	@Override
 	public boolean onActivityResult(int requestCode, int resultCode, Intent data)
 	{
 		boolean handled = false;

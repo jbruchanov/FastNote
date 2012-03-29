@@ -11,7 +11,6 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.view.MotionEvent;
 import android.view.View;
 
 import com.scurab.android.idearecorder.I;
@@ -91,19 +90,7 @@ public class PhotoActivityPresenter extends WriteActivityPresenter
 
 		//must be from file, otherwise OK button doesn't work !
 		intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(generateTempFileToSave())));
-		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 		startActivityForResult(intent, I.Constants.REQUEST_TAKE_PHOTO);
-	}
-	
-	private File getTempFile(Context context)
-	{
-		// it will return /sdcard/image.tmp
-		final File path = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-		if (!path.exists())
-		{
-			path.mkdir();
-		}
-		return new File(path, "image.jpg");
 	}
 	
 	protected void startImagePreviewActivity(Idea i)
@@ -114,26 +101,29 @@ public class PhotoActivityPresenter extends WriteActivityPresenter
 			String file = generateTempFileToSave();
 			File f = new File(file);
 			if(f.exists() && f.length() > 0)
-			{
-				intent = new Intent(mContext,ImagePreviewActivity.class);
-				intent.putExtra(I.Constants.IDEA_IMAGE_PATH, "file://" + file);
-			}
+				intent = getShowImageIntent(file);
 		}
 		else //already existing and saved idea
-		{ 
-			intent = new Intent(mContext,ImagePreviewActivity.class);
-			intent.putExtra(I.Constants.IDEA_IMAGE_PATH, "file://" + i.getPath());			
-		}
+			intent = getShowImageIntent(i.getPath());					
 		
 		if(intent != null)
 			startActivity(intent);
+	}
+	
+	private Intent getShowImageIntent(String file)
+	{
+		Intent intent = new Intent(mContext,ImagePreviewActivity.class);
+		intent.putExtra(I.Constants.IDEA_IMAGE_PATH, "file://" +  file);
+//		Intent intent = new Intent(Intent.ACTION_VIEW);
+//		intent.setDataAndType(Uri.parse(file), "image/*");
+		return intent;
 	}
 	
 	@Override
 	protected void onLoadedIdea(Idea i)
 	{
 		mUpdatingIdea = i;
-		mPhotoTaken = true;
+		mPhotoTaken = true;		
 		super.onLoadedIdea(i);
 		String file = i.getPath();
 		if(!new File(file).exists())
@@ -142,17 +132,11 @@ public class PhotoActivityPresenter extends WriteActivityPresenter
 			setImagePreview(i.getPath());
 	}
 	
-	private Intent getTakePhotoIntent(String file)
-	{
-		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);  
-		intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.parse(file));				
-		return intent;
-	}
-	
 	private String generateTempFileToSave()
 	{
 		return generateRandomFileToSave(null,null);
 	}
+	
 	@Override
 	protected String generateRandomFileToSave(String directory, String ext)
 	{
@@ -250,7 +234,6 @@ public class PhotoActivityPresenter extends WriteActivityPresenter
 			i.setName(name);
 			i.setDescription(desc);
 		}
-		
 		return i;
 	}
 	

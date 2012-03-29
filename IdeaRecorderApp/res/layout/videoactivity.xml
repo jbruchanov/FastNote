@@ -71,12 +71,22 @@
             android:layout_weight="1"
             android:src="@drawable/ico_microphone" />
         <ImageButton
-            android:id="@+id/btnVideoCamera"
+            android:id="@+id/btnPhoto"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:src="@drawable/ico_videocamera" />
     </LinearLayout>
+    <ImageView android:id="@+id/imPreview"
+        android:layout_below="@id/thirdRow"
+        android:layout_above="@id/bottomPanel"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitCenter"
+        android:layout_margin="15dip"
+        android:visibility="gone"
+        />
+    
     <LinearLayout
         android:id="@+id/bottomPanel"
         style="@android:style/ButtonBar"

@@ -1,13 +1,9 @@
 package com.scurab.android.idearecorder.activity;
 
-import com.scurab.android.idearecorder.I;
 import com.scurab.android.idearecorder.R;
 import com.scurab.android.idearecorder.presenter.MainActivityPresenter;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView.OnItemClickListener;

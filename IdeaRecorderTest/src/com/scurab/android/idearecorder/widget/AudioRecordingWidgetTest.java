@@ -8,9 +8,6 @@ import com.scurab.android.idearecorder.help.HelpImageButton;
 import com.scurab.android.idearecorder.interfaces.IAudioRecorder;
 import com.scurab.android.idearecorder.tools.AudioRecorder;
 
-import android.content.Context;
-import android.media.MediaPlayer;
-import android.media.MediaRecorder;
 import android.os.Environment;
 import android.test.AndroidTestCase;
 import android.view.View;

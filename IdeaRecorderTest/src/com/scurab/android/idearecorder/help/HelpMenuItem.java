@@ -5,7 +5,6 @@ import android.graphics.drawable.Drawable;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.ContextMenu.ContextMenuInfo;
-import android.widget.AdapterView.AdapterContextMenuInfo;
 
 public class HelpMenuItem implements MenuItem
 {

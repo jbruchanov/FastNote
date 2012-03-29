@@ -15,11 +15,8 @@ import com.scurab.android.idearecorder.tools.DataProvider;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.provider.SyncStateContract.Helpers;
 import android.test.AndroidTestCase;
 import android.widget.ImageButton;
 
