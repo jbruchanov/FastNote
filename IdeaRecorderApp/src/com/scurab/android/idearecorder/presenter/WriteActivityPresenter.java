@@ -101,12 +101,12 @@ public class WriteActivityPresenter extends IdeaActivityPresenter implements OnA
 		return result;
 	}
 	
-	protected Idea getOrcreateIdea()
+	private Idea getOrcreateIdea()
 	{
-		String name = StringTools.nullIfTrimmedEmpty(mContext.getNameEditText().getText().toString().trim());
+		String name = getIdeaName();
 		if(name == null)
 			throw new IllegalArgumentException(getString(R.string.errInvalidValueMissingArg0, getString(R.string.lblName)));
-		String desc = StringTools.nullIfTrimmedEmpty(mContext.getDescriptionEditText().getText().toString().trim());		
+		String desc = getIdeaDescription();	
 		Idea i = new Idea();
 		if(mUpdatingIdea != null)
 			i.setId(mUpdatingIdea.getId());
@@ -137,5 +137,10 @@ public class WriteActivityPresenter extends IdeaActivityPresenter implements OnA
 	protected void onRecognizedDescriptionValue(String value)
 	{
 		mContext.getDescriptionEditText().setText(value);
+	}
+	
+	protected String getIdeaDescription()
+	{
+		return StringTools.nullIfTrimmedEmpty(mContext.getDescriptionEditText().getText().toString().trim());
 	}
 }	

@@ -56,14 +56,7 @@ public class SpeechActivityPresenter extends IdeaActivityPresenter implements On
 	
 	protected IAudioRecorder getAudioRecorder(String file)
 	{
-		
-		return new AudioRecorder(file == null ? generateRandomFileToSave() : file);		
-	}
-	
-	private String generateRandomFileToSave()
-	{
-		IdeaRecorderApplication ira = (IdeaRecorderApplication)(mContext.getApplicationContext());
-		return ira.getMediaFolder(Environment.DIRECTORY_MUSIC) + "/" + System.currentTimeMillis() + ".3gp";
+		return new AudioRecorder(file == null ? generateRandomFileToSave(Environment.DIRECTORY_MUSIC,".3gp") : file);		
 	}
 	
 	@Override
@@ -109,7 +102,7 @@ public class SpeechActivityPresenter extends IdeaActivityPresenter implements On
 			}
 			else
 			{
-				if(!mUpdatingIdea.equals(getIdeaName()))
+				if(!mUpdatingIdea.getName().equals(getIdeaName()))
 				{
 					Idea i = getOrcreateIdea();
 					mDataProvider.udpate(i);
@@ -123,11 +116,6 @@ public class SpeechActivityPresenter extends IdeaActivityPresenter implements On
 			showError(e);
 		}
 		return result;
-	}
-	
-	private String getIdeaName()
-	{
-		return StringTools.nullIfTrimmedEmpty(mContext.getNameEditText().getText().toString().trim());
 	}
 	
 	private Idea getOrcreateIdea() throws IllegalAccessException, IOException

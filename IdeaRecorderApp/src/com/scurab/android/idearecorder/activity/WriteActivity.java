@@ -26,6 +26,7 @@ public class WriteActivity extends BaseIdeaActivity
 		super.onCreate(savedInstanceState);
 		init();
 		setContentView(mContentView);
+		initPresenter();
 	}
 	
 	protected void initPresenter()

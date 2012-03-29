@@ -7,16 +7,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.os.Environment;
 import android.preference.PreferenceManager.OnActivityResultListener;
 import android.speech.RecognizerIntent;
 import android.view.View;
 import android.view.View.OnClickListener;
 
 import com.scurab.android.idearecorder.I;
+import com.scurab.android.idearecorder.IdeaRecorderApplication;
 import com.scurab.android.idearecorder.R;
 import com.scurab.android.idearecorder.activity.BaseIdeaActivity;
 import com.scurab.android.idearecorder.model.Idea;
 import com.scurab.android.idearecorder.tools.DataProvider;
+import com.scurab.android.idearecorder.tools.StringTools;
 
 /**
  * Base clase for few control on basic idea write acitivity<br />
@@ -184,4 +187,20 @@ public abstract class IdeaActivityPresenter extends BasePresenter implements OnA
 		}
 	}
 	
+	/**
+	 * Returns temp file by input values
+	 * @param directory {@link Environment.#DIRECTORY_PICTURES} for example
+	 * @param ie ".3gp", can be null
+	 * @return
+	 */
+	protected String generateRandomFileToSave(String directory, String ext)
+	{
+		IdeaRecorderApplication ira = (IdeaRecorderApplication)(mContext.getApplicationContext());
+		return ira.getMediaFolder(directory) + "/" + System.currentTimeMillis() + (ext == null ? "" : ext);
+	}
+	
+	protected String getIdeaName()
+	{
+		return StringTools.nullIfTrimmedEmpty(mContext.getNameEditText().getText().toString().trim());
+	}
 }

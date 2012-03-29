@@ -1,6 +1,8 @@
 package com.scurab.android.idearecorder.presenter;
 
 import android.content.Intent;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuInflater;
@@ -14,7 +16,9 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import com.scurab.android.idearecorder.I;
 import com.scurab.android.idearecorder.R;
+import com.scurab.android.idearecorder.activity.ImagePreviewActivity;
 import com.scurab.android.idearecorder.activity.MainActivity;
+import com.scurab.android.idearecorder.activity.PhotoActivity;
 import com.scurab.android.idearecorder.activity.SpeechActivity;
 import com.scurab.android.idearecorder.activity.WriteActivity;
 import com.scurab.android.idearecorder.adapter.IdeaListAdapter;
@@ -114,6 +118,9 @@ public class MainActivityPresenter extends BasePresenter implements OnCreateCont
 			case Idea.TYPE_AUDIO:
 				c = SpeechActivity.class;
 				break;
+			case Idea.TYPE_IMAGE:
+				c = PhotoActivity.class;
+				break;
 		}
 		return c;
 	}
@@ -130,7 +137,7 @@ public class MainActivityPresenter extends BasePresenter implements OnCreateCont
 	
 	public void onPhotoIdeaClick()
 	{
-		
+		startActivity(PhotoActivity.class);
 	}
 	
 	public void onVideoIdeaClick()
