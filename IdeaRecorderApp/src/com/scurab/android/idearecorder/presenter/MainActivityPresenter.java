@@ -1,6 +1,9 @@
 package com.scurab.android.idearecorder.presenter;
 
+import java.io.File;
+
 import android.content.Intent;
+import android.net.Uri;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuInflater;
@@ -188,6 +191,10 @@ public class MainActivityPresenter extends BasePresenter implements OnCreateCont
 					onDeleteItem(getIdea(position));
 					handled = true;
 					break;
+				case R.id.muSend:
+					onSendItem(getIdea(position));
+					handled = true;
+					break;
 			}
 		}
 		catch(Exception e)
@@ -203,6 +210,46 @@ public class MainActivityPresenter extends BasePresenter implements OnCreateCont
 		((IdeaListAdapter)mContext.getListView().getAdapter()).remove(i);
 	}
 
+	public void onSendItem(Idea i)
+	{
+		String text = i.getName();
+		String description = i.getDescription();
+		if(description != null)
+			text = String.format("%s\n%s",text,description).trim();
+		
+		Intent intent = new Intent(Intent.ACTION_SEND);
+		String type = I.MimeType.APPLICATION_OCTETSTREAM;
+		switch(i.getIdeaType())
+		{
+			case Idea.TYPE_TEXT:
+				type = I.MimeType.TEXT_PLAIN;
+				break;
+			case Idea.TYPE_AUDIO:
+				type = I.MimeType.AUDIO_3GPP;				
+				break;
+			case Idea.TYPE_IMAGE:
+				type = I.MimeType.IMAGE_JPEG;
+				break;
+			case Idea.TYPE_VIDEO:
+				type = I.MimeType.VIDEO_MP4;
+				break;	
+		}
+		if(i.getIdeaType() != Idea.TYPE_TEXT && i.getPath() != null && (new File(i.getPath()).exists()))
+			intent.putExtra(Intent.EXTRA_STREAM, Uri.parse(String.format("file://%s",i.getPath())));
+		intent.setType(type);
+		intent.putExtra(Intent.EXTRA_TEXT, text);	    
+	    startActivity(Intent.createChooser(intent, "?"));
+	}
+	
+	private void onSendItemAudio(Idea i)
+	{
+		String text = String.format("%s\n%s",i.getName(),i.getDescription()).trim();
+		Intent intent = new Intent(Intent.ACTION_SEND);
+	    intent.setType(I.MimeType.TEXT_PLAIN);
+	    intent.putExtra(Intent.EXTRA_TEXT, text);	    
+	    startActivity(Intent.createChooser(intent, "?"));
+	}
+	
 	@Override
 	public void onResume()
 	{

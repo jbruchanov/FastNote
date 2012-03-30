@@ -2,6 +2,8 @@ package com.scurab.android.idearecorder.presenter;
 
 
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import com.scurab.android.idearecorder.I;
@@ -19,6 +21,7 @@ import com.scurab.android.idearecorder.tools.DataProvider;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.test.AndroidTestCase;
 import android.view.View;
 import android.view.View.OnCreateContextMenuListener;
@@ -29,6 +32,7 @@ import android.widget.ListView;
 public class MainActivityPresenterTest extends AndroidTestCase
 {
 	DataProvider db = null;
+	String fileToDelete = null;
 	@Override
 	public void setContext(Context context)
 	{
@@ -50,6 +54,10 @@ public class MainActivityPresenterTest extends AndroidTestCase
 	{	
 		super.tearDown();
 		db.deleteAllData();
+		if(fileToDelete != null)
+		{
+			new File(fileToDelete).delete();
+		}
 	}
 	
 	 public void testBindingListView()
@@ -186,6 +194,49 @@ public class MainActivityPresenterTest extends AndroidTestCase
 		 assertEquals(WriteActivity.class.getName(),ma.startActivityClass);
 		 assertTrue(ma.startIntent.hasExtra(I.Constants.IDEA_ID));
 		 assertEquals(i.getId(), ma.startIntent.getLongExtra(I.Constants.IDEA_ID, 0));
+	 }
+	 
+	 public void testSendByContextMenu() throws IOException
+	 {
+		 int[] types = new int[] {Idea.TYPE_AUDIO,Idea.TYPE_IMAGE,Idea.TYPE_TEXT,Idea.TYPE_VIDEO};
+		 String[] mimes = new String[] {I.MimeType.AUDIO_3GPP,I.MimeType.IMAGE_JPEG,I.MimeType.TEXT_PLAIN,I.MimeType.VIDEO_MP4};
+		 fileToDelete = "/sdcard/tmb.bin";
+		 TestHelper.genRandomFile(fileToDelete, 2048);
+		 for(int i = 0;i<types.length;i++)
+		 {
+			 MockMainActivity2 ma = new MockMainActivity2();
+			 ma.init();
+			 Idea data = TestHelper.getRandomIdeas(1).get(0);
+			 if(types[i] != Idea.TYPE_TEXT)
+				 data.setPath(fileToDelete);
+	 		 data.setIdeaType(types[i]);
+			 db.save(data);
+	 		 
+			 MainActivityPresenter map = new MainActivityPresenter(ma);
+			 map.loadData();
+			 
+			 HelpMenuItem hmi = new HelpMenuItem();		 
+			 hmi.setMenuInfo(new AdapterContextMenuInfo(null, 0, 0));
+			 hmi.setItemId(R.id.muSend);		 
+			 map.onContextItemSelected(hmi);
+			 
+			 assertNotNull(ma.startIntent);
+			 assertTrue(ma.startIntent.hasExtra(Intent.EXTRA_INTENT));
+			 assertEquals(Intent.ACTION_CHOOSER, ma.startIntent.getAction());
+			 
+			 Intent extraIntent = (Intent) ma.startIntent.getExtras().get(Intent.EXTRA_INTENT);
+			 assertEquals(Intent.ACTION_SEND, extraIntent.getAction());
+			 assertEquals(mimes[i], extraIntent.getType());
+			 String extra = extraIntent.getStringExtra(Intent.EXTRA_TEXT); 
+			 assertTrue(extra.contains(data.getName()) && extra.contains(data.getDescription()));
+			 if(types[i] != Idea.TYPE_TEXT)
+			 {
+				 assertTrue(extraIntent.hasExtra(Intent.EXTRA_STREAM));
+				 assertTrue(extraIntent.getExtras().get(Intent.EXTRA_STREAM) instanceof Uri);
+				 assertEquals("file://" + data.getPath(), extraIntent.getExtras().get(Intent.EXTRA_STREAM).toString());
+			 }
+			 ma.startIntent = null;
+		 }
 	 }
 	 
 	 

@@ -13,4 +13,13 @@ public class I
 		public static final int REQUEST_TAKE_PHOTO = 0x87971;
 		public static final int REQUEST_TAKE_VIDEO = 0x87972;
 	}
+	
+	public static class MimeType
+	{
+		public static final String TEXT_PLAIN = "text/plain";
+		public static final String AUDIO_3GPP = "audio/3gpp";
+		public static final String VIDEO_MP4 = "video/mp4";
+		public static final String IMAGE_JPEG = "image/jpeg";
+		public static final String APPLICATION_OCTETSTREAM = "application/octet-stream";
+	}
 }
