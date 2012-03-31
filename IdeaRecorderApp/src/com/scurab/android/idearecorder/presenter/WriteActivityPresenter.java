@@ -129,8 +129,14 @@ public class WriteActivityPresenter extends IdeaActivityPresenter implements OnA
 	
 	
 	protected void onRecognizedDescriptionValue(String value)
-	{
-		mContext.getDescriptionEditText().setText(value);
+	{		
+		String  curText = mContext.getDescriptionEditText().getText().toString();
+		String text = "";
+		if(curText.length() > 0)
+			text = String.format("%s\n%s",curText,value);
+		else
+			text = value;
+		mContext.getDescriptionEditText().setText(text);
 	}
 	
 	protected String getIdeaDescription()

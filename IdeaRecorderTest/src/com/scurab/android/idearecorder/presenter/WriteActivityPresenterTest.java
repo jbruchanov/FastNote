@@ -126,6 +126,35 @@ public class WriteActivityPresenterTest extends AndroidTestCase
 		assertEquals(text, mwa.getDescriptionEditText().getText().toString());
 	}
 	
+	public void testReceiveDescriptionToTextRepeatedly()
+	{
+		MockWriteActivity2 mwa = new MockWriteActivity2();
+		mwa.init();
+		WriteActivityPresenter map = new WriteActivityPresenter(mwa);
+		map.bind();		
+		
+		String text = "Pokus";
+		Intent i = new Intent();
+		
+		ArrayList<String> data = new ArrayList<String>();
+		data.add(text);
+		
+		i.putStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS, data);
+		map.onActivityResult(I.Constants.VOICE_RECOGNITION_REQUEST_CODE_DESCRIPTION, Activity.RESULT_OK, i);
+		
+		String text2 = "Pokus2";
+		i = new Intent();
+		
+		data = new ArrayList<String>();
+		data.add(text2);
+		
+		i.putStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS, data);
+		map.onActivityResult(I.Constants.VOICE_RECOGNITION_REQUEST_CODE_DESCRIPTION, Activity.RESULT_OK, i);
+		
+		String result = String.format("%s\n%s",text,text2);
+		assertEquals(result, mwa.getDescriptionEditText().getText().toString());
+	}
+	
 	public void testCancel()
 	{
 		MockWriteActivity2 mwa = new MockWriteActivity2();
