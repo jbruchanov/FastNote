@@ -22,6 +22,5 @@ public class MainActivityTest extends AndroidTestCase
 		{
 			attachBaseContext(mContext);
 		}
-		
 	}
 }

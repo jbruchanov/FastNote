@@ -5,6 +5,7 @@ import android.content.Intent;
 
 import com.scurab.android.idearecorder.IdeaRecorderApplication;
 import com.scurab.android.idearecorder.tools.DataProvider;
+import com.scurab.android.idearecorder.tools.PropertyProvider;
 
 public abstract class AppPresenter
 {
@@ -25,6 +26,11 @@ public abstract class AppPresenter
 	public DataProvider getDatabase()
 	{
 		return mApplication.getDatabase();
+	}
+	
+	public PropertyProvider getPropertyProvider()
+	{
+		return mApplication.getPropertyProvider();
 	}
 
 	public void startActivity(Class<?> activityClass)

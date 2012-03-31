@@ -1,5 +1,6 @@
 package com.scurab.android.idearecorder.activity;
 
+import com.scurab.android.idearecorder.interfaces.OnActivityKeyDownListener;
 import com.scurab.android.idearecorder.interfaces.OnActivityStateChangeListener;
 import com.scurab.android.idearecorder.interfaces.OnContextItemSelectedListener;
 
@@ -7,6 +8,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.preference.PreferenceManager.OnActivityResultListener;
 import android.view.ContextMenu;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -19,6 +21,7 @@ public abstract class BaseActivity extends Activity
 	private OnContextItemSelectedListener mOnContextItemSelectedListener;
 	private OnActivityResultListener mOnActivityResultListener;
 	private OnActivityStateChangeListener mOnActivityStateChangeListener;
+	private OnActivityKeyDownListener mOnActivityKeyDownListener;
 	
 	public void showError(final Throwable t)
 	{		
@@ -131,5 +134,22 @@ public abstract class BaseActivity extends Activity
 	public void setOnActivityStateChangeListener(OnActivityStateChangeListener listener)
 	{
 		mOnActivityStateChangeListener = listener;
+	}
+	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event)
+	{
+		boolean b = false;
+		if(mOnActivityKeyDownListener != null)
+			b = mOnActivityKeyDownListener.onKeyDown(keyCode,event);	
+		if(b)
+			return b;
+		else
+			return super.onKeyDown(keyCode, event);
+	}
+
+	public void setOnActivityKeyDownListener(OnActivityKeyDownListener onActivityKeyDownListener)
+	{
+		mOnActivityKeyDownListener = onActivityKeyDownListener;
 	}
 }

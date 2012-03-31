@@ -25,7 +25,9 @@
         <activity android:name="com.scurab.android.idearecorder.activity.SpeechActivity" android:theme="@android:style/Theme.Dialog" android:screenOrientation="portrait"/>
         <activity android:name="com.scurab.android.idearecorder.activity.PhotoActivity" android:theme="@android:style/Theme.Dialog" android:screenOrientation="portrait"/>
         <activity android:name="com.scurab.android.idearecorder.activity.VideoActivity" android:theme="@android:style/Theme.Dialog" android:screenOrientation="portrait"/>
-        <activity android:name="com.scurab.android.idearecorder.activity.ImagePreviewActivity" android:screenOrientation="portrait"/>
+        
+        <activity android:name="com.scurab.android.idearecorder.activity.ImagePreviewActivity"/>
+        <activity android:name="com.scurab.android.idearecorder.activity.PreferencesActivity" android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

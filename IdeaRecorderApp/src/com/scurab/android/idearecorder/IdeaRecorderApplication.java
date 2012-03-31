@@ -1,12 +1,14 @@
 package com.scurab.android.idearecorder;
 
 import com.scurab.android.idearecorder.tools.DataProvider;
+import com.scurab.android.idearecorder.tools.PropertyProvider;
 
 import android.app.Application;
 
 public class IdeaRecorderApplication extends Application
 {
 	private DataProvider mDataProvider = null;
+	private PropertyProvider mPropertyProvider = null;
 	
 	public DataProvider getDatabase()
 	{
@@ -24,6 +26,13 @@ public class IdeaRecorderApplication extends Application
 	public String getMediaFolder(String dir)
 	{
 		return getExternalFilesDir(dir).getAbsolutePath();
+	}
+
+	public PropertyProvider getPropertyProvider()
+	{
+		if(mPropertyProvider == null)
+			mPropertyProvider = PropertyProvider.getProvider(this);
+		return mPropertyProvider;
 	}
 	
 }

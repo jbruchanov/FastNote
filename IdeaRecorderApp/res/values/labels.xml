@@ -9,4 +9,5 @@
     <string name="lblPlzWait">Please wait...</string>
     <string name="lblSaving">Saving video</string>
     <string name="lblSend">Send</string>
+    <string name="lblOrder">Order</string>
 </resources>

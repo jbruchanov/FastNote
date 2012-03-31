@@ -1,5 +1,7 @@
 package com.scurab.android.idearecorder.model;
 
+import java.util.Date;
+
 public class Idea implements Comparable<Idea>
 {
 	
@@ -75,5 +77,11 @@ public class Idea implements Comparable<Idea>
 	public int compareTo(Idea another)
 	{
 		return ((Long)another.id).compareTo(id);
+	}
+	
+	@Override
+	public String toString()
+	{
+		return String.format("%s:%s (%s)[%s]",getId(),getName(),new Date(getSaveTime()).toLocaleString(),getIdeaType());
 	}
 }

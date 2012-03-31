@@ -10,10 +10,12 @@ import com.scurab.android.idearecorder.I;
 import com.scurab.android.idearecorder.R;
 import com.scurab.android.idearecorder.TestHelper;
 import com.scurab.android.idearecorder.activity.MainActivity;
+import com.scurab.android.idearecorder.activity.PreferencesActivity;
 import com.scurab.android.idearecorder.activity.WriteActivity;
 import com.scurab.android.idearecorder.help.HelpImageButton;
 import com.scurab.android.idearecorder.help.HelpListView;
 import com.scurab.android.idearecorder.help.HelpMenuItem;
+import com.scurab.android.idearecorder.interfaces.OnActivityKeyDownListener;
 import com.scurab.android.idearecorder.interfaces.OnActivityStateChangeListener;
 import com.scurab.android.idearecorder.interfaces.OnContextItemSelectedListener;
 import com.scurab.android.idearecorder.model.Idea;
@@ -67,14 +69,16 @@ public class MainActivityPresenterTest extends AndroidTestCase
 		 assertNotNull(ma.getListView().getOnItemClickListener());
 	 }
 	 
-	 public void testBindingButtons()
+	 public void testBinding()
 	 {
-		 MainActivity ma = new MockMainActivity1();		 
+		 MockMainActivity1 ma = new MockMainActivity1();		 
 		 MainActivityPresenter map = new MainActivityPresenter(ma);
 		 assertNotNull(((HelpImageButton)ma.getWriteIdeaButton()).getOnClickListener());
 		 assertNotNull(((HelpImageButton)ma.getAudioIdeaButton()).getOnClickListener());
 		 assertNotNull(((HelpImageButton)ma.getPhotoIdeaButton()).getOnClickListener());		 
 		 assertNotNull(((HelpImageButton)ma.getVideoIdeaButton()).getOnClickListener());
+		 assertNotNull(((HelpImageButton)ma.getConfigButton()).getOnClickListener());
+		 assertNotNull(ma.mOnActivityKeyDownListener);
 	 }
 	 
 	 
@@ -239,6 +243,46 @@ public class MainActivityPresenterTest extends AndroidTestCase
 		 }
 	 }
 	 
+	 public void testShowConfigButton()
+	 {
+		 MockMainActivity2 ma = new MockMainActivity2();
+		 ma.init();
+		 MainActivityPresenter pres = new MainActivityPresenter(ma);
+		 pres.bind();
+		 
+		 assertEquals(View.GONE,ma.getConfigButton().getVisibility());
+		 assertEquals(View.VISIBLE,ma.getWriteIdeaButton().getVisibility());
+		 assertEquals(View.VISIBLE,ma.getAudioIdeaButton().getVisibility());
+		 assertEquals(View.VISIBLE,ma.getVideoIdeaButton().getVisibility());
+		 assertEquals(View.VISIBLE,ma.getPhotoIdeaButton().getVisibility());
+		 
+		 pres.setConfigButtonVisible();
+		 
+		 assertEquals(View.VISIBLE,ma.getConfigButton().getVisibility());
+		 assertEquals(View.GONE,ma.getWriteIdeaButton().getVisibility());
+		 assertEquals(View.GONE,ma.getAudioIdeaButton().getVisibility());
+		 assertEquals(View.GONE,ma.getVideoIdeaButton().getVisibility());
+		 assertEquals(View.GONE,ma.getPhotoIdeaButton().getVisibility());
+		 
+		 pres.setConfigButtonInvisible();
+		 
+		 assertEquals(View.GONE,ma.getConfigButton().getVisibility());
+		 assertEquals(View.VISIBLE,ma.getWriteIdeaButton().getVisibility());
+		 assertEquals(View.VISIBLE,ma.getAudioIdeaButton().getVisibility());
+		 assertEquals(View.VISIBLE,ma.getVideoIdeaButton().getVisibility());
+		 assertEquals(View.VISIBLE,ma.getPhotoIdeaButton().getVisibility());
+	 }
+	 
+	 public void testOpenPreferenceActivity()
+	 {
+		 MockMainActivity2 ma = new MockMainActivity2();
+		 ma.init();
+		 MainActivityPresenter pres = new MainActivityPresenter(ma);
+		 pres.onConfiguButtonClick();
+		 
+		 assertNotNull(ma.startIntent);
+		 assertEquals(PreferencesActivity.class.getName(),ma.startIntent.getComponent().getClassName());
+	 }
 	 
 	 private class MockMainActivity1 extends MainActivity
 	 {
@@ -247,6 +291,8 @@ public class MainActivityPresenterTest extends AndroidTestCase
 		HelpImageButton mSpeech = new HelpImageButton(mContext);
 		HelpImageButton mAudio = new HelpImageButton(mContext);
 		HelpImageButton mVideo = new HelpImageButton(mContext);
+		HelpImageButton mConfig = new HelpImageButton(mContext);
+		public OnActivityKeyDownListener mOnActivityKeyDownListener = null;
 		
 		public MockMainActivity1()
 		{
@@ -281,6 +327,18 @@ public class MainActivityPresenterTest extends AndroidTestCase
 		{
 			return mVideo;
 		}
+		
+		@Override
+		public View getConfigButton()
+		{
+			return mConfig;
+		}
+		
+		@Override
+		public void setOnActivityKeyDownListener(OnActivityKeyDownListener onActivityKeyDownListener)
+		{
+			mOnActivityKeyDownListener = onActivityKeyDownListener;
+		}
 	 }
 	 
 	 private class MockMainActivity2 extends MainActivity
@@ -291,6 +349,7 @@ public class MainActivityPresenterTest extends AndroidTestCase
 		 public String startActivityClass = null;
 		 public OnActivityStateChangeListener onActivityStateChangeListener;
 		 public Intent startIntent = null;
+		 
 		 
 		public MockMainActivity2()
 		{
@@ -343,5 +402,7 @@ public class MainActivityPresenterTest extends AndroidTestCase
 		{
 			onActivityStateChangeListener = listener;
 		}
+		
+		
 	 }
 }

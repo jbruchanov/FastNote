@@ -18,6 +18,7 @@ public class MainActivity extends BaseActivity
 	private ImageButton mAudio = null;
 	private ImageButton mPhoto = null;
 	private ImageButton mVideo = null;
+	private ImageButton mConfig = null;
 	
 	private OnItemClickListener mOnItemClickListener;
 	
@@ -39,6 +40,7 @@ public class MainActivity extends BaseActivity
 		mAudio = (ImageButton) mContentView.findViewById(R.id.btnAudio);
 		mPhoto = (ImageButton) mContentView.findViewById(R.id.btnPhoto);
 		mVideo = (ImageButton) mContentView.findViewById(R.id.btnVideo);
+		mConfig = (ImageButton) mContentView.findViewById(R.id.btnConfig);
 	}
 	
 	@Override
@@ -76,5 +78,10 @@ public class MainActivity extends BaseActivity
 	public ImageButton getVideoIdeaButton()
 	{
 		return mVideo;
+	}
+
+	public View getConfigButton()
+	{
+		return mConfig;
 	}
 }

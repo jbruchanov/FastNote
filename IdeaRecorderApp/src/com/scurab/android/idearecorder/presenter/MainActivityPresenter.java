@@ -1,16 +1,23 @@
 package com.scurab.android.idearecorder.presenter;
 
 import java.io.File;
+import java.util.Collections;
+import java.util.List;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.preference.PreferenceActivity;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.KeyEvent;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnCreateContextMenuListener;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
@@ -19,19 +26,25 @@ import com.scurab.android.idearecorder.I;
 import com.scurab.android.idearecorder.R;
 import com.scurab.android.idearecorder.activity.MainActivity;
 import com.scurab.android.idearecorder.activity.PhotoActivity;
+import com.scurab.android.idearecorder.activity.PreferencesActivity;
 import com.scurab.android.idearecorder.activity.SpeechActivity;
 import com.scurab.android.idearecorder.activity.VideoActivity;
 import com.scurab.android.idearecorder.activity.WriteActivity;
 import com.scurab.android.idearecorder.adapter.IdeaListAdapter;
+import com.scurab.android.idearecorder.interfaces.OnActivityKeyDownListener;
 import com.scurab.android.idearecorder.interfaces.OnActivityStateChangeListener;
 import com.scurab.android.idearecorder.interfaces.OnContextItemSelectedListener;
 import com.scurab.android.idearecorder.model.Idea;
 import com.scurab.android.idearecorder.tools.DataProvider;
+import com.scurab.android.idearecorder.tools.IdeaOrder;
 
-public class MainActivityPresenter extends BasePresenter implements OnCreateContextMenuListener, OnContextItemSelectedListener, OnActivityStateChangeListener
+public class MainActivityPresenter extends BasePresenter implements OnCreateContextMenuListener, OnContextItemSelectedListener, OnActivityStateChangeListener, OnActivityKeyDownListener
 {
 	private MainActivity mContext;
 	private DataProvider mDataProvider = null;
+	private boolean mConfigButtonVisible = false;
+	private Animation[] mAnimations;
+	private AnimationListener mDownAnimListener;
 	
 	public MainActivityPresenter(MainActivity activity)
 	{
@@ -42,7 +55,7 @@ public class MainActivityPresenter extends BasePresenter implements OnCreateCont
 		
 	}
 	
-	private void bind()
+	protected void bind()
 	{
 		mContext.getListView().setOnItemClickListener(new OnItemClickListener()
 		{
@@ -90,12 +103,57 @@ public class MainActivityPresenter extends BasePresenter implements OnCreateCont
 			}
 		});
 		
+		mContext.getConfigButton().setOnClickListener(new OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				onConfiguButtonClick();
+			}
+		});
+		
+		mContext.setOnActivityKeyDownListener(this);
+		
 		registerForContextMenu();
 		mContext.setOnContextMenuCreateListener(this);
 		mContext.setOnContextItemSelectedListener(this);
 		mContext.setOnActivityStateChangeListener(this);
+		
+		
+		bindAnimations();
 	}
 	
+	protected void bindAnimations()
+	{
+		mAnimations = new Animation[] {AnimationUtils.loadAnimation(mContext, R.anim.scroll_up_def),
+				   						AnimationUtils.loadAnimation(mContext, R.anim.scroll_down_def)};
+
+		mDownAnimListener = new AnimationListener()
+		{
+			@Override
+			public void onAnimationStart(Animation animation)
+			{
+			}
+			
+			@Override
+			public void onAnimationRepeat(Animation animation)
+			{
+			}
+			
+			@Override
+			public void onAnimationEnd(Animation animation)
+			{
+				handleSwitchBottomPanelButtons();
+			}
+		};
+		mAnimations[0].setAnimationListener(mDownAnimListener);		
+	}
+	
+	public void onConfiguButtonClick()
+	{
+		startActivity(PreferencesActivity.class);
+	}
+
 	protected void registerForContextMenu()
 	{
 		mContext.registerForContextMenu(mContext.getListView());
@@ -151,7 +209,10 @@ public class MainActivityPresenter extends BasePresenter implements OnCreateCont
 
 	public void loadData()
 	{	
-		mContext.getListView().setAdapter(new IdeaListAdapter(mContext, mDataProvider.getIdeas()));
+		int order = Integer.parseInt(getPropertyProvider().getString(R.string.PROPERTY_ITEMS_ORDER, String.valueOf(IdeaOrder.ORDER_BY_NAME_DESCENDING)));
+		List<Idea> data = mDataProvider.getIdeas();
+		Collections.sort(data,IdeaOrder.getComparator(order));
+		mContext.getListView().setAdapter(new IdeaListAdapter(mContext, data));
 	}
 
 	//not tested
@@ -254,11 +315,59 @@ public class MainActivityPresenter extends BasePresenter implements OnCreateCont
 	public void onResume()
 	{
 		loadData();
+		setConfigButtonInvisible();
 	}
 
 	@Override
 	public void onPause()
 	{
 		
+	}
+
+	public void onOptionButtonClick()
+	{
+		View v = mContext.findViewById(R.id.bottomPanel);		
+		v.startAnimation(mAnimations[0]);//move bottom panel down
+	}
+	
+	private void handleSwitchBottomPanelButtons()
+	{
+		View v = mContext.findViewById(R.id.bottomPanel);
+		v.startAnimation(mAnimations[1]);//move bottom panel up
+		if(mConfigButtonVisible)
+			setConfigButtonInvisible();
+		else
+			setConfigButtonVisible();
+	}
+	
+	protected void setConfigButtonVisible()
+	{
+		mContext.getConfigButton().setVisibility(View.VISIBLE);
+		mContext.getWriteIdeaButton().setVisibility(View.GONE);
+		mContext.getAudioIdeaButton().setVisibility(View.GONE);
+		mContext.getPhotoIdeaButton().setVisibility(View.GONE);
+		mContext.getVideoIdeaButton().setVisibility(View.GONE);
+		mConfigButtonVisible = true;
+	}
+	
+	protected void setConfigButtonInvisible()
+	{
+		mContext.getConfigButton().setVisibility(View.GONE);
+		mContext.getWriteIdeaButton().setVisibility(View.VISIBLE);
+		mContext.getAudioIdeaButton().setVisibility(View.VISIBLE);
+		mContext.getPhotoIdeaButton().setVisibility(View.VISIBLE);
+		mContext.getVideoIdeaButton().setVisibility(View.VISIBLE);
+		mConfigButtonVisible = false;
+	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event)
+	{
+		if(keyCode == KeyEvent.KEYCODE_MENU)
+		{
+			onOptionButtonClick();
+			return true;
+		}
+		return false;
 	}
 }

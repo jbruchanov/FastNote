@@ -39,6 +39,14 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ico_videocamera"
             android:layout_weight="1" />
+         <ImageButton
+            android:visibility="gone"
+            android:id="@+id/btnConfig"
+            android:layout_width="0dip"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ico_config"
+            android:layout_weight="1" />
     </LinearLayout>
 
     <ListView
