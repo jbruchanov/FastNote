@@ -44,7 +44,9 @@ public class MainActivityPresenter extends BasePresenter implements OnCreateCont
 	private DataProvider mDataProvider = null;
 	private boolean mConfigButtonVisible = false;
 	private Animation[] mAnimations;
+	private AnimationListener mUpAnimListener;
 	private AnimationListener mDownAnimListener;
+	private boolean mInAnimation;
 	
 	public MainActivityPresenter(MainActivity activity)
 	{
@@ -147,6 +149,30 @@ public class MainActivityPresenter extends BasePresenter implements OnCreateCont
 			}
 		};
 		mAnimations[0].setAnimationListener(mDownAnimListener);		
+		
+		mUpAnimListener = new AnimationListener()
+		{
+			@Override
+			public void onAnimationStart(Animation animation)
+			{
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onAnimationRepeat(Animation animation)
+			{
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onAnimationEnd(Animation animation)
+			{
+				mInAnimation = false;
+			}
+		};
+		mAnimations[1].setAnimationListener(mUpAnimListener);
 	}
 	
 	public void onConfiguButtonClick()
@@ -325,9 +351,13 @@ public class MainActivityPresenter extends BasePresenter implements OnCreateCont
 	}
 
 	public void onOptionButtonClick()
-	{
-		View v = mContext.findViewById(R.id.bottomPanel);		
-		v.startAnimation(mAnimations[0]);//move bottom panel down
+	{		
+		if(!mInAnimation)
+		{
+			mInAnimation = true;
+			View v = mContext.findViewById(R.id.bottomPanel);		
+			v.startAnimation(mAnimations[0]);//move bottom panel down
+		}
 	}
 	
 	private void handleSwitchBottomPanelButtons()
