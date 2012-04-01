@@ -200,7 +200,7 @@ public class MainActivityPresenterTest extends AndroidTestCase
 		 assertEquals(i.getId(), ma.startIntent.getLongExtra(I.Constants.IDEA_ID, 0));
 	 }
 	 
-	 public void testSendByContextMenu() throws IOException
+	 public void testSendByContextMenu() throws IOException, InterruptedException
 	 {
 		 int[] types = new int[] {Idea.TYPE_AUDIO,Idea.TYPE_IMAGE,Idea.TYPE_TEXT,Idea.TYPE_VIDEO};
 		 String[] mimes = new String[] {I.MimeType.AUDIO_3GPP,I.MimeType.IMAGE_JPEG,I.MimeType.TEXT_PLAIN,I.MimeType.VIDEO_MP4};
@@ -240,6 +240,7 @@ public class MainActivityPresenterTest extends AndroidTestCase
 				 assertEquals("file://" + data.getPath(), extraIntent.getExtras().get(Intent.EXTRA_STREAM).toString());
 			 }
 			 ma.startIntent = null;
+			 db.deleteAllData();
 		 }
 	 }
 	 
@@ -394,7 +395,8 @@ public class MainActivityPresenterTest extends AndroidTestCase
 		public void startActivity(android.content.Intent intent) 
 		{
 			startIntent = intent;
-			startActivityClass = intent.getComponent().getClassName();
+			if(intent.getComponent() != null)
+				startActivityClass = intent.getComponent().getClassName();
 		};
 		
 		@Override

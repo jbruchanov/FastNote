@@ -11,7 +11,7 @@ import android.test.AndroidTestCase;
 
 public class ByHand extends AndroidTestCase
 {
-	int debug = 2;
+	int debug = 0;
 
 	@Override
 	protected void setUp() throws Exception
