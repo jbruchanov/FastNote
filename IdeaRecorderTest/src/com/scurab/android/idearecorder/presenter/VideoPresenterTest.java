@@ -2,19 +2,14 @@ package com.scurab.android.idearecorder.presenter;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
-
 import com.scurab.android.idearecorder.I;
 import com.scurab.android.idearecorder.TestHelper;
 import com.scurab.android.idearecorder.activity.VideoActivity;
 import com.scurab.android.idearecorder.model.Idea;
 import com.scurab.android.idearecorder.tools.DataProvider;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.test.AndroidTestCase;
 
 public class VideoPresenterTest extends AndroidTestCase

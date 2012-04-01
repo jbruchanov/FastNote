@@ -43,14 +43,7 @@ public class AudioRecorder implements IAudioRecorder, OnCompletionListener
 	@Override
 	public void startRecording() throws IllegalStateException, IOException
 	{
-		try
-		{
-			mRecorder.prepare();
-		}
-		catch(Throwable e)
-		{
-			String s = e.getMessage();
-		}
+		mRecorder.prepare();
         mRecorder.start();
 		mState = STATE_RECORDING;
 	}

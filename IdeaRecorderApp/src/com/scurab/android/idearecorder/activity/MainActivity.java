@@ -3,12 +3,10 @@ package com.scurab.android.idearecorder.activity;
 import com.scurab.android.idearecorder.R;
 import com.scurab.android.idearecorder.presenter.MainActivityPresenter;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.view.ViewParent;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
@@ -22,8 +20,6 @@ public class MainActivity extends BaseActivity
 	private ImageButton mVideo = null;
 	private ImageButton mConfig = null;
 
-	private OnItemClickListener mOnItemClickListener;
-
 	@Override
 	public void onAttachedToWindow()
 	{	
@@ -36,7 +32,7 @@ public class MainActivity extends BaseActivity
 		super.onCreate(savedInstanceState);
 		init();
 		this.setContentView(mContentView);
-		MainActivityPresenter map = new MainActivityPresenter(this);
+		new MainActivityPresenter(this);
 	}
 
 	private void initHeaderBackgroundColor()
