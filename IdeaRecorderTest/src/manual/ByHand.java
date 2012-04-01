@@ -5,7 +5,6 @@ import com.scurab.android.idearecorder.tools.DataProvider;
 
 import android.database.Cursor;
 import android.net.Uri;
-import android.provider.MediaStore;
 import android.provider.MediaStore.MediaColumns;
 import android.test.AndroidTestCase;
 

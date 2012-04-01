@@ -73,10 +73,10 @@ public class MainActivityPresenterTest extends AndroidTestCase
 	 {
 		 MockMainActivity1 ma = new MockMainActivity1();		 
 		 MainActivityPresenter map = new MainActivityPresenter(ma);
-		 assertNotNull(((HelpImageButton)ma.getWriteIdeaButton()).getOnClickListener());
-		 assertNotNull(((HelpImageButton)ma.getAudioIdeaButton()).getOnClickListener());
-		 assertNotNull(((HelpImageButton)ma.getPhotoIdeaButton()).getOnClickListener());		 
-		 assertNotNull(((HelpImageButton)ma.getVideoIdeaButton()).getOnClickListener());
+		 assertNotNull(ma.getWriteIdeaButton().getOnClickListener());
+		 assertNotNull(ma.getAudioIdeaButton().getOnClickListener());
+		 assertNotNull(ma.getPhotoIdeaButton().getOnClickListener());		 
+		 assertNotNull(ma.getVideoIdeaButton().getOnClickListener());
 		 assertNotNull(((HelpImageButton)ma.getConfigButton()).getOnClickListener());
 		 assertNotNull(ma.mOnActivityKeyDownListener);
 	 }

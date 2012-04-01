@@ -9,8 +9,6 @@ import java.io.InputStream;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
-import android.provider.MediaStore;
-import android.provider.MediaStore.MediaColumns;
 
 public class IOUtils
 {

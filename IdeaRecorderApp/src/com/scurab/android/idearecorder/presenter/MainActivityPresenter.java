@@ -6,7 +6,6 @@ import java.util.List;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.preference.PreferenceActivity;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.KeyEvent;
@@ -325,15 +324,6 @@ public class MainActivityPresenter extends BasePresenter implements OnCreateCont
 			intent.putExtra(Intent.EXTRA_STREAM, Uri.parse(String.format("file://%s",i.getPath())));
 		intent.setType(type);
 		intent.putExtra(Intent.EXTRA_TEXT, text);	    
-	    startActivity(Intent.createChooser(intent, "?"));
-	}
-	
-	private void onSendItemAudio(Idea i)
-	{
-		String text = String.format("%s\n%s",i.getName(),i.getDescription()).trim();
-		Intent intent = new Intent(Intent.ACTION_SEND);
-	    intent.setType(I.MimeType.TEXT_PLAIN);
-	    intent.putExtra(Intent.EXTRA_TEXT, text);	    
 	    startActivity(Intent.createChooser(intent, "?"));
 	}
 	
