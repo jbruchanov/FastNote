@@ -4,17 +4,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-
 import com.scurab.android.idearecorder.tools.DataProvider;
 import com.scurab.android.idearecorder.tools.IOUtils;
 import com.scurab.android.idearecorder.tools.PropertyProvider;
 
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.app.Application;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Environment;
 import android.util.Log;
 import android.widget.Toast;
