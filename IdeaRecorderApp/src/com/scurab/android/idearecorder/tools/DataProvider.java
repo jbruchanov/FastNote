@@ -1,5 +1,6 @@
 package com.scurab.android.idearecorder.tools;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,17 +12,26 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Environment;
 
 public class DataProvider extends SQLiteOpenHelper
 {
-	private static final String NAME = "IdeaRecorder.sqlite";
+	public static final String NAME = "/IdeaRecorder.sqlite";
 	private static final int VERSION = 1;
 	private Context mContext;
 	
 	public DataProvider(Context context)
 	{
-		super(context, NAME, null, VERSION);
+		super(context, getDatabaseLocation(), null, VERSION);
 		mContext = context;
+	}
+	
+	public static String getDatabaseLocation()
+	{
+		File dir = new File(Environment.getExternalStorageDirectory() + "/" + "IdeaRecorder");
+		if(!dir.exists())
+			dir.mkdir();
+		return dir.getAbsolutePath()  + NAME;
 	}
 
 	/**

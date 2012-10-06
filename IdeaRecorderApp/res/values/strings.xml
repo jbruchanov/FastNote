@@ -1,9 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-
     <string name="hello">Hello World!</string>
-    <string name="app_name">Idea Recorder</string>
-        
+    <string name="app_name">FastNote</string>
+    <string name="txtActText">FastNote Text</string>
+    <string name="txtActAudio">FastNote Audio</string>
+    <string name="txtActPhoto">FastNote Photo</string>
+    <string name="txtActVideo">FastNote Video</string>
     <string name="txtIdeaRecorderName">Idea Recorder - Name</string>
     <string name="txtIdeaRecorderDescription">Idea Recorder - Description</string>
     <string name="errInvalidValueMissingArg0">Invalid values, missing %1$s</string>
@@ -12,5 +14,5 @@
     <string name="txtImageNotFound">Image for this record not found!</string>
     <string name="txtAudioNotFound">Audio for this record not found!</string>
     <string name="txtVideoNotFound">Video for this record not found!</string>
-
+    <string name="txtNOSDCard">Unable to access SDCard for writing, please check it!</string>
 </resources>

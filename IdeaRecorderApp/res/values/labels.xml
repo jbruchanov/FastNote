@@ -10,4 +10,6 @@
     <string name="lblSaving">Saving video</string>
     <string name="lblSend">Send</string>
     <string name="lblOrder">Order</string>
+    <string name="lblError">Error</string>
+    <string name="lblOK">OK</string>
 </resources>

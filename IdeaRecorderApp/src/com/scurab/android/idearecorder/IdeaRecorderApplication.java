@@ -1,9 +1,23 @@
 package com.scurab.android.idearecorder;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+
 import com.scurab.android.idearecorder.tools.DataProvider;
+import com.scurab.android.idearecorder.tools.IOUtils;
 import com.scurab.android.idearecorder.tools.PropertyProvider;
 
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.app.Application;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.os.Environment;
+import android.util.Log;
+import android.widget.Toast;
 
 public class IdeaRecorderApplication extends Application
 {
@@ -12,9 +26,54 @@ public class IdeaRecorderApplication extends Application
 	
 	public DataProvider getDatabase()
 	{
-		if(mDataProvider == null)
-			mDataProvider = new DataProvider(this);
+		try
+		{
+			if(mDataProvider == null)
+				if(hasStorage())
+					mDataProvider = new DataProvider(this);
+		}
+		catch(Exception e)
+		{
+			Log.e("IdeaRecorderApplication.getDatabase", e.getMessage());
+		}
 		return mDataProvider;
+	}
+	
+	@Override
+	public void onCreate()
+	{
+		super.onCreate();
+		if(hasStorage())
+		{
+			try
+			{
+				tryMoveLocalToSDCard();
+			}
+			catch(Exception e)
+			{
+				Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+			}
+		}
+	}
+	
+	public static boolean hasStorage() {
+	    String state = Environment.getExternalStorageState();
+	    if (Environment.MEDIA_MOUNTED.equals(state)) {
+	            return true;
+	    } else if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
+	        return true;
+	    }
+	    return false;
+	}
+
+	private void tryMoveLocalToSDCard() throws FileNotFoundException, IOException
+	{
+		File dbLocal = new File("/data/data/com.scurab.android.idearecorder/databases" + DataProvider.NAME);
+		File dbMemCard = new File(DataProvider.getDatabaseLocation());
+		if (dbLocal.exists() && !dbMemCard.exists())
+		{
+			IOUtils.copyFile(new FileInputStream(dbLocal), dbMemCard.getAbsolutePath());
+		}
 	}
 
 	/**

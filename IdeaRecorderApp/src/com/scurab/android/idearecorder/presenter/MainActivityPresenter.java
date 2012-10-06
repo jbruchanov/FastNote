@@ -4,6 +4,9 @@ import java.io.File;
 import java.util.Collections;
 import java.util.List;
 
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.view.ContextMenu;
@@ -52,7 +55,24 @@ public class MainActivityPresenter extends BasePresenter implements OnCreateCont
 		super(activity);
 		mDataProvider = getDatabase();
 		mContext = activity;		
-		bind();
+		if(mDataProvider == null)
+		{
+			AlertDialog.Builder b = new Builder(activity);
+			b.setTitle(R.string.lblError);
+			b.setMessage(R.string.txtNOSDCard);
+			b.setPositiveButton(R.string.lblOK, new DialogInterface.OnClickListener()
+			{
+				@Override
+				public void onClick(DialogInterface dialog, int which)
+				{
+					finish();
+					System.exit(0);
+				}
+			});
+			b.create().show();
+		}
+		else
+			bind();
 		
 	}
 	
