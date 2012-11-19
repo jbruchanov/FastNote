@@ -4,31 +4,26 @@ import com.scurab.android.idearecorder.activity.WriteActivity;
 
 import android.test.AndroidTestCase;
 
-public class WriteActivityTest extends AndroidTestCase
-{
-	public void testFindingViews()
-	{
-		MockWriteActivity mw = new MockWriteActivity();
-		mw.init();
-		assertNotNull(mw.getNameEditText());
-		assertNotNull(mw.getDescriptionEditText());
-		assertNotNull(mw.getNameRecordButton());
-		assertNotNull(mw.getDescriptionRecorderButton());
-		assertNotNull(mw.getSaveButton());
-		assertNotNull(mw.getCancelButton());
+public class WriteActivityTest extends AndroidTestCase {
+    public void testFindingViews() {
+	MockWriteActivity mw = new MockWriteActivity();
+	mw.init();
+	assertNotNull(mw.getNameEditText());
+	assertNotNull(mw.getDescriptionEditText());
+	assertNotNull(mw.getNameRecordButton());
+	assertNotNull(mw.getDescriptionRecorderButton());
+	assertNotNull(mw.getSaveButton());
+	assertNotNull(mw.getCancelButton());
+    }
+
+    private class MockWriteActivity extends WriteActivity {
+	public MockWriteActivity() {
+	    attachBaseContext(mContext);
 	}
-	
-	private class MockWriteActivity extends WriteActivity
-	{
-		public MockWriteActivity()
-		{
-			attachBaseContext(mContext);
-		}
-		
-		@Override
-		public void init()
-		{
-			super.init();
-		}
+
+	@Override
+	public void init() {
+	    super.init();
 	}
+    }
 }

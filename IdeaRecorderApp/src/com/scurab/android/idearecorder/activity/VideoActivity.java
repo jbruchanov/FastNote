@@ -5,21 +5,18 @@ import com.scurab.android.idearecorder.presenter.VideoActivityPresenter;
 
 import android.view.View;
 
-public class VideoActivity extends PhotoActivity
-{
-	private View mContentView;
-	
-	@Override
-	protected void initPresenter() 
-	{
-		new VideoActivityPresenter(this);
-	}
-	
-	@Override
-	protected View getContentView()
-	{
-		if(mContentView == null)
-			mContentView = View.inflate(this, R.layout.videoactivity, null);
-		return mContentView;
-	}
+public class VideoActivity extends PhotoActivity {
+    private View mContentView;
+
+    @Override
+    protected void initPresenter() {
+	new VideoActivityPresenter(this);
+    }
+
+    @Override
+    protected View getContentView() {
+	if (mContentView == null)
+	    mContentView = View.inflate(this, R.layout.videoactivity, null);
+	return mContentView;
+    }
 }

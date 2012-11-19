@@ -2,30 +2,30 @@ package com.scurab.android.idearecorder.interfaces;
 
 import java.io.IOException;
 
-public interface IAudioRecorder
-{
-	public interface OnStopPlayingListener
-	{
-		void onStop();
-	}
-	public void startRecording() throws IllegalStateException, IOException;
+public interface IAudioRecorder {
+    public interface OnStopPlayingListener {
+	void onStop();
+    }
 
-	public boolean isRecording();
+    public void startRecording() throws IllegalStateException, IOException;
 
-	public void stopRecording();
+    public boolean isRecording();
 
-	/**
-	 * Don't forget to call this method to release source!
-	 */
-	public void release();
+    public void stopRecording();
 
-	public abstract void startPlaying() throws IllegalArgumentException, IllegalStateException, IOException;
+    /**
+     * Don't forget to call this method to release source!
+     */
+    public void release();
 
-	public boolean isPlaying();
+    public abstract void startPlaying() throws IllegalArgumentException,
+	    IllegalStateException, IOException;
 
-	public void stopPlaying();
-	
-	public void setOnStopPlayingListener(OnStopPlayingListener listener);
-	
-	public String getFile();
+    public boolean isPlaying();
+
+    public void stopPlaying();
+
+    public void setOnStopPlayingListener(OnStopPlayingListener listener);
+
+    public String getFile();
 }

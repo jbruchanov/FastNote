@@ -8,86 +8,77 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
-public class WriteActivity extends BaseIdeaActivity
-{
-	private View mContentView = null;
-	private EditText mNameEditText = null;
-	private EditText mDescriptionEditText = null;
-	
-	private ImageButton mNameRecordButton = null;
-	private ImageButton mDescriptionRecorderButton = null;
-	
-	private ImageButton mSaveButton = null;
-	private ImageButton mCancelButton = null;
-	
-	@Override
-	protected void onCreate(Bundle savedInstanceState)
-	{
-		super.onCreate(savedInstanceState);
-		init();
-		setContentView(mContentView);
-		initPresenter();
-	}
-	
-	protected void initPresenter()
-	{
-		new WriteActivityPresenter(this);
-	}
-	
-	protected void init()
-	{
-		mContentView = getContentView();
-		mNameEditText = (EditText) mContentView.findViewById(R.id.etName);
-		mDescriptionEditText = (EditText) mContentView.findViewById(R.id.etDescription);
-		
-		mNameRecordButton = (ImageButton)mContentView.findViewById(R.id.btnNameToText);
-		mDescriptionRecorderButton = (ImageButton)mContentView.findViewById(R.id.btnDescriptionToText);
-		
-		mSaveButton = (ImageButton)mContentView.findViewById(R.id.btnSave);
-		mCancelButton = (ImageButton)mContentView.findViewById(R.id.btnCancel);
-	}
-		
-	@Override
-	public EditText getNameEditText()
-	{
-		return mNameEditText;
-	}
+public class WriteActivity extends BaseIdeaActivity {
+    private View mContentView = null;
+    private EditText mNameEditText = null;
+    private EditText mDescriptionEditText = null;
 
-	public EditText getDescriptionEditText()
-	{
-		return mDescriptionEditText;
-	}
+    private ImageButton mNameRecordButton = null;
+    private ImageButton mDescriptionRecorderButton = null;
 
-	@Override
-	public ImageButton getNameRecordButton()
-	{
-		return mNameRecordButton;
-	}
+    private ImageButton mSaveButton = null;
+    private ImageButton mCancelButton = null;
 
-	public ImageButton getDescriptionRecorderButton()
-	{
-		return mDescriptionRecorderButton;
-	}
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+	super.onCreate(savedInstanceState);
+	init();
+	setContentView(mContentView);
+	initPresenter();
+    }
 
-	@Override
-	public ImageButton getSaveButton()
-	{
-		return mSaveButton;
-	}
+    protected void initPresenter() {
+	new WriteActivityPresenter(this);
+    }
 
-	@Override
-	public ImageButton getCancelButton()
-	{
-		return mCancelButton;
-	}
+    protected void init() {
+	mContentView = getContentView();
+	mNameEditText = (EditText) mContentView.findViewById(R.id.etName);
+	mDescriptionEditText = (EditText) mContentView
+		.findViewById(R.id.etDescription);
 
-	@Override
-	protected View getContentView()
-	{
-		if(mContentView == null)
-			mContentView = View.inflate(this, R.layout.writeactivity, null);
-		return mContentView;
-	}
-	
+	mNameRecordButton = (ImageButton) mContentView
+		.findViewById(R.id.btnNameToText);
+	mDescriptionRecorderButton = (ImageButton) mContentView
+		.findViewById(R.id.btnDescriptionToText);
+
+	mSaveButton = (ImageButton) mContentView.findViewById(R.id.btnSave);
+	mCancelButton = (ImageButton) mContentView.findViewById(R.id.btnCancel);
+    }
+
+    @Override
+    public EditText getNameEditText() {
+	return mNameEditText;
+    }
+
+    public EditText getDescriptionEditText() {
+	return mDescriptionEditText;
+    }
+
+    @Override
+    public ImageButton getNameRecordButton() {
+	return mNameRecordButton;
+    }
+
+    public ImageButton getDescriptionRecorderButton() {
+	return mDescriptionRecorderButton;
+    }
+
+    @Override
+    public ImageButton getSaveButton() {
+	return mSaveButton;
+    }
+
+    @Override
+    public ImageButton getCancelButton() {
+	return mCancelButton;
+    }
+
+    @Override
+    protected View getContentView() {
+	if (mContentView == null)
+	    mContentView = View.inflate(this, R.layout.writeactivity, null);
+	return mContentView;
+    }
 
 }

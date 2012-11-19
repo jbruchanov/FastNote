@@ -83,13 +83,13 @@ public class IdeaRecorderApplication extends Application {
 	}
 	return mPropertyProvider;
     }
-    
-    public void onStorageChange(){
-	if(mDataProvider != null){
+
+    public void onStorageChange() {
+	if (mDataProvider != null) {
 	    mDataProvider.close();
 	}
 	mDataProvider = null;
-	
+
     }
 
 }
