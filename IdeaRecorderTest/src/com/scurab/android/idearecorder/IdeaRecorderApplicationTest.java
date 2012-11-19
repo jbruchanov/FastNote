@@ -21,7 +21,7 @@ public class IdeaRecorderApplicationTest extends AndroidTestCase
 	public void testGetMediaFolder()
 	{
 		IdeaRecorderApplication c = (IdeaRecorderApplication) getContext().getApplicationContext();
-		assertEquals("/mnt/sdcard/Android/data/com.scurab.android.idearecorder/files/Pictures",c.getMediaFolder(Environment.DIRECTORY_PICTURES));
+		assertTrue(c.getMediaFolder(Environment.DIRECTORY_PICTURES).contains("Android/data/com.scurab.android.idearecorder/files/Pictures"));
 	}
 	
 	public void testGetPropertyProvider()

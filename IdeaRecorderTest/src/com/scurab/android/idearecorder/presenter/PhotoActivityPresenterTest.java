@@ -4,14 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import com.scurab.android.idearecorder.I;
-import com.scurab.android.idearecorder.TestHelper;
-import com.scurab.android.idearecorder.activity.ImagePreviewActivity;
-import com.scurab.android.idearecorder.activity.PhotoActivity;
-import com.scurab.android.idearecorder.help.HelpImageButton;
-import com.scurab.android.idearecorder.model.Idea;
-import com.scurab.android.idearecorder.tools.DataProvider;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -19,6 +11,14 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.test.AndroidTestCase;
 import android.widget.ImageButton;
+
+import com.scurab.android.idearecorder.I;
+import com.scurab.android.idearecorder.TestHelper;
+import com.scurab.android.idearecorder.activity.ImagePreviewActivity;
+import com.scurab.android.idearecorder.activity.PhotoActivity;
+import com.scurab.android.idearecorder.help.HelpImageButton;
+import com.scurab.android.idearecorder.model.Idea;
+import com.scurab.android.idearecorder.tools.DataProvider;
 
 public class PhotoActivityPresenterTest extends AndroidTestCase
 {
@@ -77,7 +77,7 @@ public class PhotoActivityPresenterTest extends AndroidTestCase
 		assertEquals(I.Constants.REQUEST_TAKE_PHOTO,par.startcode);
 		assertEquals(MediaStore.ACTION_IMAGE_CAPTURE,par.startingIntent.getAction());
 		assertTrue(par.startingIntent.hasExtra(MediaStore.EXTRA_OUTPUT));
-		assertTrue(par.startingIntent.getExtras().get(MediaStore.EXTRA_OUTPUT).toString().length() > Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).length());
+		assertTrue(par.startingIntent.getExtras().get(MediaStore.EXTRA_OUTPUT).toString().trim().length() > Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).toString().trim().length());
 	}
 	
 	public void testReceivePhotoIntent() throws IOException
@@ -257,8 +257,9 @@ public class PhotoActivityPresenterTest extends AndroidTestCase
 		@Override
 		public ImageButton getPhotoButton()
 		{
-			if(photo == null)
-				photo = new HelpImageButton(mContext);
+			if(photo == null) {
+			    photo = new HelpImageButton(mContext);
+			}
 			return photo;
 		}
 	}

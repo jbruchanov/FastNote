@@ -6,4 +6,8 @@
 	    android:entryValues="@array/OrderValues"
 	    android:defaultValue="4"
 	    />
+	<ListPreference android:key="@string/PROPERTY_STORAGE" 
+	    android:title="@string/lblStorage"
+	    android:enabled="false"
+	    />
 </PreferenceScreen>

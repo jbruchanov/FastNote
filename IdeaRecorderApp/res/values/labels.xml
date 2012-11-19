@@ -12,4 +12,5 @@
     <string name="lblOrder">Order</string>
     <string name="lblError">Error</string>
     <string name="lblOK">OK</string>
+    <string name="lblStorage">Storage</string>
 </resources>
